@@ -97,7 +97,7 @@ export const App = () => {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            Photos
+                            Trevalado
                         </Typography>
                         {auth && (
                             <div>
