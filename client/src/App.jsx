@@ -125,7 +125,6 @@ export const App = () => {
                 title: 'Review',
                 review: 'abc',
                 rating: 5,
-                COVID_cases: ,
                 timestamp: '13:44:00'
             }
         ])
