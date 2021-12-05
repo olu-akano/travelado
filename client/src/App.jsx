@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './style.css';
-import ReactMapGL, { Marker } from 'react-map-gl';
-
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -36,6 +35,25 @@ export const App = () => {
             longitude: 0.1276,
             zoom: 10
         });
+
+
+    const CustomPopup = ({ index, marker, closePopup }) => {
+        return (
+            <Popup
+                latitude={marker.latitude}
+                longitude={marker.longitude}
+                onClose={closePopup}
+                closeButton={true}
+                closeOnClick={false}
+                offsetTop={-30}
+            >
+                <p>{marker.name}</p>
+            </Popup>
+        )
+    };
+
+
+
     const [markers, setMarkers] = React.useState(
         [{
             latitude: 51.5072,
@@ -64,6 +82,9 @@ export const App = () => {
     };
 
 
+
+
+
     const onSelected = (item) => {
         setMarker({
             name: item.place_name,
@@ -74,16 +95,48 @@ export const App = () => {
 
 
 
-    let markerCollection = [];
+    const markerCollection = [];
     markers.forEach((marker, index) => {
         markerCollection.push(
             <Marker
+                key={index}
                 longitude={marker.longitude}
                 latitude={marker.latitude}>
                 <div className="marker temporary-marker"><span></span></div>
             </Marker>
         )
     })
+
+
+    const addMarker = (clickedLocation) => {
+        let long = clickedLocation.lngLat[0]
+        let lat = clickedLocation.lngLat[1]
+
+        //place to show the popup so that the user can enter details
+
+
+
+
+        setMarkers([
+            ...markers,
+            {
+                latitude: lat,
+                longitude: long,
+                title: 'Review',
+                review: 'abc',
+                rating: 5,
+                COVID_cases: ,
+                timestamp: '13:44:00'
+            }
+        ])
+
+        console.log(long)
+        console.log(lat)
+
+    }
+
+
+
 
     return (
         <>
@@ -156,6 +209,7 @@ export const App = () => {
                 {...viewport}
                 {...mapStyle}
                 onViewportChange={(viewport) => setViewport(viewport)}
+                onClick={(clickedLocation) => addMarker(clickedLocation)}
             >
                 {markerCollection}
 
@@ -164,7 +218,6 @@ export const App = () => {
     );
 }
 
-// 1. Currently the marker is an object. Convert that into an array of objects
-// 2. Use a for loop to display all markers
-// 3. Change color of marker to red
-// 4.  
+// 1. 
+// 2. Change color of marker to red
+// 3.  
