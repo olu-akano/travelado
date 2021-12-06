@@ -74,9 +74,27 @@ export const App = () => {
     };
 
 
-    const hangleDialogClose = () => {
+    const handleDialogClose = () => {
         setDialogOpen(false);
     }
+
+
+
+
+    const showDialog = (clickedLocation) => {
+        let lat = clickedLocation.lngLat[1]
+        let lng = clickedLocation.lngLat[0]
+
+        setcurrentClickedMarkerLatLng([lat, lng])
+        setDialogOpen(true)
+    }
+
+
+
+
+
+
+
 
 
     const addMarker = () => {
@@ -96,19 +114,6 @@ export const App = () => {
         ])
     }
 
-    const showDialog = (clickedLocation) => {
-        let lat = clickedLocation.lngLat[1]
-        let lng = clickedLocation.lngLat[0]
-
-        setcurrentClickedMarkerLatLng([lat, lng])
-        setDialogOpen(true)
-    }
-
-
-
-
-
-
     const markerCollection = [];
     markers.forEach((marker, index) => {
         markerCollection.push(
@@ -123,11 +128,13 @@ export const App = () => {
                     latitude={marker.latitude}
                     longitude={marker.longitude}
                     closeButton={true}
-                    closeOnClick={false}>
+                    closeOnClick={false}
+                    anchor="top">
                     <div>{marker.title}</div>
                     <div>{marker.userName}</div>
                     <div>{marker.comment}</div>
                     <div>{marker.rating}</div>
+
                 </Popup>
 
             </div>
@@ -136,10 +143,6 @@ export const App = () => {
 
         )
     })
-
-
-
-
 
     return (
         <>
@@ -217,7 +220,7 @@ export const App = () => {
                 {markerCollection}
             </ReactMapGL>
             <Dialog open={dialogOpen}>
-                <DialogTitle>Comments marker</DialogTitle>
+                <DialogTitle>Trevalago marker</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         Add your comments here!
@@ -233,11 +236,11 @@ export const App = () => {
                         fullWidth
                         variant='outlined'
                     />
-
-
-
-
                 </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDialogClose}>Cancel</Button>
+                    <Button onClick={addMarker}>Add</Button>
+                </DialogActions>
             </Dialog>
         </>
     );
