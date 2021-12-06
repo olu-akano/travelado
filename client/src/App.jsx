@@ -17,6 +17,7 @@ import Menu from '@mui/material/Menu';
 
 import mapboxgl from '!mapbox-gl';
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWNyd2sifQ.L5VJBCeE8JNppDI41T7CpQ';
+// hide access token
 
 const mapStyle = {
     width: '100%',
@@ -27,15 +28,29 @@ const mapboxApiKey = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWN
 
 export const App = () => {
 
-    const [auth, setAuth] = React.useState(true);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [viewport, setViewport] = React.useState(
+    const [auth, setAuth] = useState(true);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [viewport, setViewport] = useState(
         {
             latitude: 51.5072,
             longitude: 0.1276,
             zoom: 10
         });
 
+        const [markers, setMarkers] = useState(
+            [{
+                latitude: 51.5072,
+                longitude: 0.1276,
+                name: 'test-1'
+            }, {
+                latitude: 56.5072,
+                longitude: 5.1276,
+                name: 'test-2'
+            }, {
+                latitude: 46.5072,
+                longitude: -10.1276,
+                name: 'test-3'
+            },]);
 
     const CustomPopup = ({ index, marker, closePopup }) => {
         return (
@@ -52,22 +67,9 @@ export const App = () => {
         )
     };
 
+    
 
 
-    const [markers, setMarkers] = React.useState(
-        [{
-            latitude: 51.5072,
-            longitude: 0.1276,
-            name: 'test-1'
-        }, {
-            latitude: 56.5072,
-            longitude: 5.1276,
-            name: 'test-2'
-        }, {
-            latitude: 46.5072,
-            longitude: -10.1276,
-            name: 'test-3'
-        },]);
 
     const handleChange = (event) => {
         setAuth(event.target.checked);
@@ -113,8 +115,6 @@ export const App = () => {
         let lat = clickedLocation.lngLat[1]
 
         //place to show the popup so that the user can enter details
-
-
 
 
         setMarkers([
@@ -216,7 +216,3 @@ export const App = () => {
         </>
     );
 }
-
-// 1. 
-// 2. Change color of marker to red
-// 3.  
