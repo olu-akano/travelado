@@ -28,6 +28,13 @@ const mapboxApiKey = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWN
 
 export const App = () => {
 
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [currentClickedMarkerLatLng, setcurrentClickedMarkerLatLng] = useState([0, 0]);
+    const [titleField, setTitleField] = useState("");
+    const [commentField, setCommentField] = useState("");
+    const [ratingField, setRatingField] = useState(0);
+    const [currentUser, setCurrentUser] = useState("Saja");
+
     const [auth, setAuth] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
     const [viewport, setViewport] = useState(
