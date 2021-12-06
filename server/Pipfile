@@ -5,10 +5,6 @@ name = "pypi"
 
 [packages]
 django = "*"
-<<<<<<< HEAD
-djangorestframework = "*"
-=======
->>>>>>> bf9ec3244cb1d8b268d826275c4164af8ff01cbd
 django-allauth = "*"
 
 [dev-packages]
