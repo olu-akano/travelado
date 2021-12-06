@@ -1,7 +1,10 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import './style.css';
-import ReactMapGL, { Marker, Popup, GeolocateControl } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import Geocoder from 'react-map-gl-geocoder'
+
 import { GeoLocater } from './components'
+
 
 
 import AppBar from '@mui/material/AppBar';
@@ -31,6 +34,28 @@ const mapboxApiKey = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWN
 
 export const App = () => {
 
+
+    const geocoderContainerRef = useRef();
+    const mapRef = useRef();
+    const handleViewportChange = useCallback(
+        (newViewport) => setViewport(newViewport),
+        []
+    );
+
+
+    // const handleGeocoderViewportChange = useCallback(
+    //     (newViewport) => {
+    //         const geocoderDefaultOverrides = { transitionDuration: 1000 };
+
+    //         return handleViewportChange({
+    //             ...newViewport,
+    //             ...geocoderDefaultOverrides
+    //         });
+    //     },
+    //     []
+    // );
+
+
     const [auth, setAuth] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
     const [viewport, setViewport] = useState(
@@ -55,10 +80,7 @@ export const App = () => {
             name: 'test-3'
         },]);
 
-    const geolocateControlStyle = {
-        right: 10,
-        top: 10
-    };
+
 
 
     const CustomPopup = ({ index, marker, closePopup }) => {
@@ -146,6 +168,8 @@ export const App = () => {
 
 
 
+
+
     return (
         <>
             <Box sx={{ flexGrow: 1 }}>
@@ -213,15 +237,27 @@ export const App = () => {
             </Box>
             <br></br>
             <ReactMapGL
+                ref={mapRef}
                 mapboxApiAccessToken={mapboxApiKey}
                 mapStyle="mapbox://styles/mapbox/streets-v11"
                 {...viewport}
                 {...mapStyle}
-                onViewportChange={(viewport) => setViewport(viewport)}
+                onViewportChange={handleViewportChange}
                 onClick={(clickedLocation) => addMarker(clickedLocation)}
 
             >
+
+
+                <Geocoder
+                    mapRef={mapRef}
+                    containerRef={geocoderContainerRef}
+                    onViewportChange={handleViewportChange}
+                    mapboxApiAccessToken={mapboxApiKey}
+                    position="top-left"
+                />
                 <GeoLocater />
+
+
                 {markerCollection}
 
             </ReactMapGL>
