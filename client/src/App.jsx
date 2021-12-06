@@ -79,7 +79,12 @@ export const App = () => {
         ])
     }
 
-    
+    const showDialog = (clickedLocation) => {
+        let lat = clickedLocation.lngLat[1]
+        let lng = clickedLocation.lngLat[0]
+        setcurrentClickedMarkerLatLng([lat, lng])
+        setDialogOpen(true)
+    }
 
 
 
