@@ -37,20 +37,22 @@ export const App = () => {
             zoom: 10
         });
 
-        const [markers, setMarkers] = useState(
-            [{
-                latitude: 51.5072,
-                longitude: 0.1276,
-                name: 'test-1'
-            }, {
-                latitude: 56.5072,
-                longitude: 5.1276,
-                name: 'test-2'
-            }, {
-                latitude: 46.5072,
-                longitude: -10.1276,
-                name: 'test-3'
-            },]);
+
+
+    const [markers, setMarkers] = useState(
+        [{
+            latitude: 51.5072,
+            longitude: 0.1276,
+            name: 'test-1'
+        }, {
+            latitude: 56.5072,
+            longitude: 5.1276,
+            name: 'test-2'
+        }, {
+            latitude: 46.5072,
+            longitude: -10.1276,
+            name: 'test-3'
+        },]);
 
     const CustomPopup = ({ index, marker, closePopup }) => {
         return (
@@ -67,7 +69,7 @@ export const App = () => {
         )
     };
 
-    
+
 
 
 
@@ -211,8 +213,14 @@ export const App = () => {
                 onClick={(clickedLocation) => addMarker(clickedLocation)}
             >
                 {markerCollection}
-
             </ReactMapGL>
+            <Dialog open={ } onClose={ }>
+                <DialogTitle>Review marker</DialogTitle>
+                <DialogContent>
+                    {/* ... */}
+                </DialogContent>
+                {/* ... */}
+            </Dialog>
         </>
     );
 }
