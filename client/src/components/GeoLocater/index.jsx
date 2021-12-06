@@ -5,7 +5,7 @@ export const GeoLocater = () => {
 
 
     const geolocateControlStyle = {
-        right: 10,
+        left: 10,
         top: 10
     };
 

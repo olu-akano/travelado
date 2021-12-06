@@ -35,24 +35,7 @@ const mapboxApiKey = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWN
 
 export const App = () => {
 
-
-
     const mapRef = useRef();
-
-
-
-    // const handleGeocoderViewportChange = useCallback(
-    //     (newViewport) => {
-    //         const geocoderDefaultOverrides = { transitionDuration: 1000 };
-
-    //         return handleViewportChange({
-    //             ...newViewport,
-    //             ...geocoderDefaultOverrides
-    //         });
-    //     },
-    //     []
-    // );
-
 
     const [auth, setAuth] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -111,7 +94,9 @@ export const App = () => {
         )
     };
 
+    useEffect(() => {
 
+    }, [])
 
 
 
@@ -248,7 +233,7 @@ export const App = () => {
 
             >
 
-                <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} viewport={viewport}  handleGeocoderViewportChange={handleGeocoderViewportChange}/>
+                <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} viewport={viewport} handleGeocoderViewportChange={handleGeocoderViewportChange} />
                 <GeoLocater />
 
                 {markerCollection}
