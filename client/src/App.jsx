@@ -38,10 +38,7 @@ export const App = () => {
 
 
     const mapRef = useRef();
-    const handleViewportChange = useCallback(
-        (newViewport) => setViewport(newViewport),
-        []
-    );
+
 
 
     // const handleGeocoderViewportChange = useCallback(
@@ -82,6 +79,21 @@ export const App = () => {
         },]);
 
 
+    const handleViewportChange = useCallback(
+        (newViewport) => setViewport(newViewport),
+        []
+    );
+
+    const handleGeocoderViewportChange = useCallback(newViewport => {
+        const geocoderDefaultOverrides = { transitionDuration: 1000 };
+
+        return handleViewportChange({
+            ...newViewport,
+            ...geocoderDefaultOverrides
+        });
+    },
+        []
+    );
 
 
     const CustomPopup = ({ index, marker, closePopup }) => {
@@ -236,16 +248,8 @@ export const App = () => {
 
             >
 
-
-                <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} />
-                {/* <Geocoder
-                    mapRef={mapRef}
-                    onViewportChange={handleGeocoderViewportChange}
-                    mapboxApiAccessToken={mapboxApiKey}
-                    position="top-right"
-                /> */}
+                <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} viewport={viewport}  handleGeocoderViewportChange={handleGeocoderViewportChange}/>
                 <GeoLocater />
-
 
                 {markerCollection}
 
