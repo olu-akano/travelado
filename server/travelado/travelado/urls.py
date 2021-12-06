@@ -19,8 +19,8 @@ from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
-    path('', include('reviews.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view()),
+    path('reviews/', include("reviews.urls"))
 ]
