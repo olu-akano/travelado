@@ -1,27 +1,28 @@
-import React from 'react'
+import React, { useRef, useEffect, useState, useCallback } from 'react'
+import Geocoder from 'react-map-gl-geocoder'
 
-export const SearchForm = () => {
+export const SearchForm = ({ mapRef, mapboxApiKey }) => {
 
+    const handleGeocoderViewportChange = useCallback(newViewport => {
+        const geocoderDefaultOverrides = { transitionDuration: 1000 };
 
-    // mapboxgl.accessToken = 'pk.eyJ1IjoiaGFtc2FtdXh1bWVkIiwiYSI6ImNrd3MybGxuODBrdWIzMWxzcWt3OWozMGkifQ.NQEvNUAlbCWFBctLYFuYAQ';
-    // const map = new mapboxgl.Map({
-    // container: 'map',
-    // style: 'mapbox://styles/mapbox/streets-v11',
-    // center: [-79.4512, 43.6568],
-    // zoom: 13
-    // });
+        return handleViewportChange({
+            ...newViewport,
+            ...geocoderDefaultOverrides
+        });
+    },
+        []
+    );
 
-    // // Add the control to the map.
-    // map.addControl(
-    // new MapboxGeocoder({
-    // accessToken: mapboxgl.accessToken,
-    // mapboxgl: mapboxgl
-    // })
-    // );
 
     return (
         <>
-            <input type="text" className="search" placeholder="Search for Locations" />
+            <Geocoder
+                mapRef={mapRef}
+                onViewportChange={handleGeocoderViewportChange}
+                mapboxApiAccessToken={mapboxApiKey}
+                position="top-right"
+            />
 
 
         </>

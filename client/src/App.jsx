@@ -1,9 +1,10 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import './style.css';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
-import Geocoder from 'react-map-gl-geocoder'
+// import Geocoder from 'react-map-gl-geocoder'
 
-import { GeoLocater } from './components'
+
+import { GeoLocater, SearchForm } from './components'
 
 
 
@@ -21,7 +22,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
 import mapboxgl from '!mapbox-gl';
-import { SearchForm } from './components';
+
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWNyd2sifQ.L5VJBCeE8JNppDI41T7CpQ';
 // hide access token
 
@@ -35,7 +36,7 @@ const mapboxApiKey = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWN
 export const App = () => {
 
 
-    const geocoderContainerRef = useRef();
+
     const mapRef = useRef();
     const handleViewportChange = useCallback(
         (newViewport) => setViewport(newViewport),
@@ -43,17 +44,17 @@ export const App = () => {
     );
 
 
-    const handleGeocoderViewportChange = useCallback(
-        (newViewport) => {
-            const geocoderDefaultOverrides = { transitionDuration: 1000 };
+    // const handleGeocoderViewportChange = useCallback(
+    //     (newViewport) => {
+    //         const geocoderDefaultOverrides = { transitionDuration: 1000 };
 
-            return handleViewportChange({
-                ...newViewport,
-                ...geocoderDefaultOverrides
-            });
-        },
-        []
-    );
+    //         return handleViewportChange({
+    //             ...newViewport,
+    //             ...geocoderDefaultOverrides
+    //         });
+    //     },
+    //     []
+    // );
 
 
     const [auth, setAuth] = useState(true);
@@ -114,10 +115,6 @@ export const App = () => {
         setAnchorEl(null);
     };
 
-
-
-
-
     const onSelected = (item) => {
         setMarker({
             name: item.place_name,
@@ -125,8 +122,6 @@ export const App = () => {
             latitude: item.center[1]
         })
     }
-
-
 
     const markerCollection = [];
     markers.forEach((marker, index) => {
@@ -165,15 +160,9 @@ export const App = () => {
 
     }
 
-
-
-
-
-
     return (
         <>
             <Box sx={{ flexGrow: 1 }}>
-                <SearchForm />
                 <FormGroup>
                     <FormControlLabel
                         control={
@@ -248,12 +237,13 @@ export const App = () => {
             >
 
 
-                <Geocoder
+                <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} />
+                {/* <Geocoder
                     mapRef={mapRef}
                     onViewportChange={handleGeocoderViewportChange}
                     mapboxApiAccessToken={mapboxApiKey}
-                    position="top-left"
-                />
+                    position="top-right"
+                /> */}
                 <GeoLocater />
 
 
