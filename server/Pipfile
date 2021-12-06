@@ -4,6 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+<<<<<<< HEAD
+=======
+django = "*"
+djangorestframework = "*"
+django-allauth = "*"
+>>>>>>> dev/olu
 
 [dev-packages]
 
