@@ -22,5 +22,5 @@ urlpatterns = [
     path('', include('reviews.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('logout', LogoutView.as_view()),
+    path('logout', LogoutView.as_view(), name='logout'),
 ]
