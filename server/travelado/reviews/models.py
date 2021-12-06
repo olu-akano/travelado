@@ -8,7 +8,7 @@ class Reviews(models.Model):
     body = models.CharField(max_length = 1500)
     latitude = models.CharField(max_length = 30)
     longitude = models.CharField(max_length = 30)
-    date = models.DateField(auto_now=False)
+    date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.title}'
