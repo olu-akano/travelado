@@ -16,6 +16,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
 import mapboxgl from '!mapbox-gl';
+import { SearchForm } from './components';
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWNyd2sifQ.L5VJBCeE8JNppDI41T7CpQ';
 // hide access token
 
@@ -37,20 +38,23 @@ export const App = () => {
             zoom: 10
         });
 
-        const [markers, setMarkers] = useState(
-            [{
-                latitude: 51.5072,
-                longitude: 0.1276,
-                name: 'test-1'
-            }, {
-                latitude: 56.5072,
-                longitude: 5.1276,
-                name: 'test-2'
-            }, {
-                latitude: 46.5072,
-                longitude: -10.1276,
-                name: 'test-3'
-            },]);
+    const [markers, setMarkers] = useState(
+        [{
+            latitude: 51.5072,
+            longitude: 0.1276,
+            name: 'test-1'
+        }, {
+            latitude: 56.5072,
+            longitude: 5.1276,
+            name: 'test-2'
+        }, {
+            latitude: 46.5072,
+            longitude: -10.1276,
+            name: 'test-3'
+        },]);
+
+
+
 
     const CustomPopup = ({ index, marker, closePopup }) => {
         return (
@@ -67,7 +71,7 @@ export const App = () => {
         )
     };
 
-    
+
 
 
 
@@ -140,6 +144,7 @@ export const App = () => {
     return (
         <>
             <Box sx={{ flexGrow: 1 }}>
+                <SearchForm />
                 <FormGroup>
                     <FormControlLabel
                         control={
