@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './style.css';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup, GeolocateControl } from 'react-map-gl';
+import { GeoLocater } from './components'
+
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -53,7 +55,10 @@ export const App = () => {
             name: 'test-3'
         },]);
 
-
+    const geolocateControlStyle = {
+        right: 10,
+        top: 10
+    };
 
 
     const CustomPopup = ({ index, marker, closePopup }) => {
@@ -214,10 +219,13 @@ export const App = () => {
                 {...mapStyle}
                 onViewportChange={(viewport) => setViewport(viewport)}
                 onClick={(clickedLocation) => addMarker(clickedLocation)}
+
             >
+                <GeoLocater />
                 {markerCollection}
 
             </ReactMapGL>
+
         </>
     );
 }
