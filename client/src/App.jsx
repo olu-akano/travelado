@@ -1,6 +1,12 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import './style.css';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+// import Geocoder from 'react-map-gl-geocoder'
+
+
+import { GeoLocater, SearchForm } from './components'
+
+
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -16,7 +22,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
 import mapboxgl from '!mapbox-gl';
-import { SearchForm } from './components';
+
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWNyd2sifQ.L5VJBCeE8JNppDI41T7CpQ';
 // hide access token
 
@@ -28,6 +34,8 @@ const mapStyle = {
 const mapboxApiKey = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWNyd2sifQ.L5VJBCeE8JNppDI41T7CpQ';
 
 export const App = () => {
+
+    const mapRef = useRef();
 
     const [auth, setAuth] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -54,6 +62,21 @@ export const App = () => {
         },]);
 
 
+    const handleViewportChange = useCallback(
+        (newViewport) => setViewport(newViewport),
+        []
+    );
+
+    const handleGeocoderViewportChange = useCallback(newViewport => {
+        const geocoderDefaultOverrides = { transitionDuration: 1000 };
+
+        return handleViewportChange({
+            ...newViewport,
+            ...geocoderDefaultOverrides
+        });
+    },
+        []
+    );
 
 
     const CustomPopup = ({ index, marker, closePopup }) => {
@@ -71,7 +94,9 @@ export const App = () => {
         )
     };
 
+    useEffect(() => {
 
+    }, [])
 
 
 
@@ -87,10 +112,6 @@ export const App = () => {
         setAnchorEl(null);
     };
 
-
-
-
-
     const onSelected = (item) => {
         setMarker({
             name: item.place_name,
@@ -98,8 +119,6 @@ export const App = () => {
             latitude: item.center[1]
         })
     }
-
-
 
     const markerCollection = [];
     markers.forEach((marker, index) => {
@@ -138,13 +157,9 @@ export const App = () => {
 
     }
 
-
-
-
     return (
         <>
             <Box sx={{ flexGrow: 1 }}>
-                <SearchForm />
                 <FormGroup>
                     <FormControlLabel
                         control={
@@ -208,16 +223,23 @@ export const App = () => {
             </Box>
             <br></br>
             <ReactMapGL
+                ref={mapRef}
                 mapboxApiAccessToken={mapboxApiKey}
                 mapStyle="mapbox://styles/mapbox/streets-v11"
                 {...viewport}
                 {...mapStyle}
-                onViewportChange={(viewport) => setViewport(viewport)}
+                onViewportChange={handleViewportChange}
                 onClick={(clickedLocation) => addMarker(clickedLocation)}
+
             >
+
+                <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} viewport={viewport} handleGeocoderViewportChange={handleGeocoderViewportChange} />
+                <GeoLocater />
+
                 {markerCollection}
 
             </ReactMapGL>
+
         </>
     );
 }

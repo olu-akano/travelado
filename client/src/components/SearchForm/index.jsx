@@ -1,9 +1,21 @@
 import React from 'react'
+import Geocoder from 'react-map-gl-geocoder'
 
-export const SearchForm = () => {
+export const SearchForm = ({ mapRef, mapboxApiKey, handleGeocoderViewportChange }) => {
+
     return (
         <>
-        <input type="text" className="search" placeholder="Search for Locations"/>
+            <Geocoder
+                mapRef={mapRef}
+                onViewportChange={handleGeocoderViewportChange}
+                mapboxApiAccessToken={mapboxApiKey}
+                position="top-right"
+            />
+
         </>
     )
 }
+
+
+
+
