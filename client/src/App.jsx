@@ -44,9 +44,10 @@ export const App = () => {
             zoom: 10
         });
 
-
-
     const [markers, setMarkers] = useState([]);
+
+
+    // events
 
 
     const handleChange = (event) => {
@@ -61,7 +62,24 @@ export const App = () => {
         setAnchorEl(null);
     };
 
+    const addMarker = () => {
+        const lat = currentClickedMarkerLatLng[0]
+        const lng = currentClickedMarkerLatLng[1]
 
+        setMarkers([
+            ...markers,
+            {
+                latitude: lat,
+                longitude: lng,
+                title: titleField,
+                comment: commentField,
+                rating: ratingField,
+                userName: currentUser
+            }
+        ])
+    }
+
+    
 
 
 
