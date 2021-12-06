@@ -15,6 +15,17 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
+import Rating from '@mui/material/Rating';
+import Button from '@mui/material/Button';
+
+
+
 import mapboxgl from '!mapbox-gl';
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWNyd2sifQ.L5VJBCeE8JNppDI41T7CpQ';
 // hide access token
@@ -62,6 +73,12 @@ export const App = () => {
         setAnchorEl(null);
     };
 
+
+    const hangleDialogClose = () => {
+        setDialogOpen(false);
+    }
+
+
     const addMarker = () => {
         const lat = currentClickedMarkerLatLng[0]
         const lng = currentClickedMarkerLatLng[1]
@@ -82,6 +99,7 @@ export const App = () => {
     const showDialog = (clickedLocation) => {
         let lat = clickedLocation.lngLat[1]
         let lng = clickedLocation.lngLat[0]
+
         setcurrentClickedMarkerLatLng([lat, lng])
         setDialogOpen(true)
     }
@@ -119,30 +137,6 @@ export const App = () => {
         )
     })
 
-
-    const addMarker = (clickedLocation) => {
-        let long = clickedLocation.lngLat[0]
-        let lat = clickedLocation.lngLat[1]
-
-        //place to show the popup so that the user can enter details
-
-
-        setMarkers([
-            ...markers,
-            {
-                latitude: lat,
-                longitude: long,
-                title: 'Review',
-                review: 'abc',
-                rating: 5,
-                timestamp: '13:44:00'
-            }
-        ])
-
-        console.log(long)
-        console.log(lat)
-
-    }
 
 
 
@@ -218,17 +212,32 @@ export const App = () => {
                 {...viewport}
                 {...mapStyle}
                 onViewportChange={(viewport) => setViewport(viewport)}
-                onClick={(clickedLocation) => addMarker(clickedLocation)}
+                onClick={(clickedLocation) => showDialog(clickedLocation)}
             >
                 {markerCollection}
             </ReactMapGL>
-            <Dialog open={ } onClose={ }>
-                <DialogTitle>Review marker</DialogTitle>
+            <Dialog open={dialogOpen}>
+                <DialogTitle>Comments marker</DialogTitle>
                 <DialogContent>
-                    {/* ... 
-                    - */}
+                    <DialogContentText>
+                        Add your comments here!
+                    </DialogContentText>
+                    <TextField
+                        requried
+                        value={titleField}
+                        onChange={(e) => setTitleField(e.target.value)}
+                        margin="dense"
+                        id="title"
+                        helperText="Give your comment a title"
+                        type="text"
+                        fullWidth
+                        variant='outlined'
+                    />
+
+
+
+
                 </DialogContent>
-                {/* ... */}
             </Dialog>
         </>
     );
