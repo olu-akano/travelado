@@ -43,17 +43,17 @@ export const App = () => {
     );
 
 
-    // const handleGeocoderViewportChange = useCallback(
-    //     (newViewport) => {
-    //         const geocoderDefaultOverrides = { transitionDuration: 1000 };
+    const handleGeocoderViewportChange = useCallback(
+        (newViewport) => {
+            const geocoderDefaultOverrides = { transitionDuration: 1000 };
 
-    //         return handleViewportChange({
-    //             ...newViewport,
-    //             ...geocoderDefaultOverrides
-    //         });
-    //     },
-    //     []
-    // );
+            return handleViewportChange({
+                ...newViewport,
+                ...geocoderDefaultOverrides
+            });
+        },
+        []
+    );
 
 
     const [auth, setAuth] = useState(true);
@@ -250,8 +250,7 @@ export const App = () => {
 
                 <Geocoder
                     mapRef={mapRef}
-                    containerRef={geocoderContainerRef}
-                    onViewportChange={handleViewportChange}
+                    onViewportChange={handleGeocoderViewportChange}
                     mapboxApiAccessToken={mapboxApiKey}
                     position="top-left"
                 />
