@@ -58,25 +58,34 @@ export const App = () => {
 
 
 
-    const onSelected = (item) => {
-        setMarker({
-            name: item.place_name,
-            longitude: item.center[0],
-            latitude: item.center[1]
-        })
-    }
 
 
 
     const markerCollection = [];
     markers.forEach((marker, index) => {
         markerCollection.push(
-            <Marker
-                key={index}
-                longitude={marker.longitude}
-                latitude={marker.latitude}>
-                <div className="marker temporary-marker"><span></span></div>
-            </Marker>
+            <div key={index}>
+
+                <Marker
+                    longitude={marker.longitude}
+                    latitude={marker.latitude} >
+                    <div className="marker temporary-marker"><span></span></div>
+                </Marker >
+                <Popup
+                    latitude={marker.latitude}
+                    longitude={marker.longitude}
+                    closeButton={true}
+                    closeOnClick={false}>
+                    <div>{marker.title}</div>
+                    <div>{marker.userName}</div>
+                    <div>{marker.comment}</div>
+                    <div>{marker.rating}</div>
+                </Popup>
+
+            </div>
+
+
+
         )
     })
 
@@ -186,7 +195,8 @@ export const App = () => {
             <Dialog open={ } onClose={ }>
                 <DialogTitle>Review marker</DialogTitle>
                 <DialogContent>
-                    {/* ... */}
+                    {/* ... 
+                    - */}
                 </DialogContent>
                 {/* ... */}
             </Dialog>
