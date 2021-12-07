@@ -3,10 +3,10 @@ import Geocoder from 'react-map-gl-geocoder'
 import './style.css'
 
 export const SearchForm = ({ mapRef, mapboxApiKey, handleGeocoderViewportChange, geocoderContainerRef }) => {
-    const geolocateControlStyle = {
-        left: 10,
-        top: 10
-    };
+    // const geolocateControlStyle = {
+    //     left: 10,
+    //     top: 10
+    // };
 
     return (
         <>

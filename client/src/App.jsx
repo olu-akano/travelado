@@ -4,7 +4,7 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 
 
 
-import { GeoLocater, SearchForm, RegisterOrLogin } from './components'
+import { GeoLocater, SearchForm, RegisterOrLogin, WebScraper } from './components'
 
 
 
@@ -259,7 +259,7 @@ export const App = () => {
                 onDblClick={handleDialog}
             >
                 <RegisterOrLogin />
-
+                <WebScraper />
 
                 <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} geocoderContainerRef={geocoderContainerRef} handleGeocoderViewportChange={handleGeocoderViewportChange} />
 

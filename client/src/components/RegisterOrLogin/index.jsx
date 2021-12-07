@@ -6,7 +6,7 @@ export const RegisterOrLogin = () => {
         <div>
 
             <form action="https://localhost:8000/">
-                <input type="submit" value=" Login / Signup " />
+                <input className ="LoginOrSignup" type="submit" value=" Login / Signup " />
             </form>
 
         </div>
