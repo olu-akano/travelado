@@ -1,6 +1,12 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import './style.css';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+// import Geocoder from 'react-map-gl-geocoder'
+
+
+import { GeoLocater, SearchForm } from './components'
+
+
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -27,6 +33,7 @@ import Button from '@mui/material/Button';
 
 
 import mapboxgl from '!mapbox-gl';
+
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWNyd2sifQ.L5VJBCeE8JNppDI41T7CpQ';
 // hide access token
 
@@ -45,6 +52,7 @@ export const App = () => {
     const [commentField, setCommentField] = useState("");
     const [ratingField, setRatingField] = useState(0);
     const [currentUser, setCurrentUser] = useState("Saja");
+    const mapRef = useRef();
 
     const [auth, setAuth] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -57,6 +65,42 @@ export const App = () => {
 
     const [markers, setMarkers] = useState([]);
 
+
+    const handleViewportChange = useCallback(
+        (newViewport) => setViewport(newViewport),
+        []
+    );
+
+    const handleGeocoderViewportChange = useCallback(newViewport => {
+        const geocoderDefaultOverrides = { transitionDuration: 1000 };
+
+        return handleViewportChange({
+            ...newViewport,
+            ...geocoderDefaultOverrides
+        });
+    },
+        []
+    );
+
+
+    const CustomPopup = ({ index, marker, closePopup }) => {
+        return (
+            <Popup
+                latitude={marker.latitude}
+                longitude={marker.longitude}
+                onClose={closePopup}
+                closeButton={true}
+                closeOnClick={false}
+                offsetTop={-30}
+            >
+                <p>{marker.name}</p>
+            </Popup>
+        )
+    };
+
+    useEffect(() => {
+
+    }, [])
 
     // events
 
@@ -91,6 +135,25 @@ export const App = () => {
 
 
 
+    const onSelected = (item) => {
+        setMarker({
+            name: item.place_name,
+            longitude: item.center[0],
+            latitude: item.center[1]
+        })
+    }
+
+    const markerCollection = [];
+    markers.forEach((marker, index) => {
+        markerCollection.push(
+            <Marker
+                key={index}
+                longitude={marker.longitude}
+                latitude={marker.latitude}>
+                <div className="marker temporary-marker"><span></span></div>
+            </Marker>
+        )
+    })
 
 
 
@@ -137,7 +200,7 @@ export const App = () => {
 
                 </Popup>
 
-            </div>
+            </div >
 
 
 
@@ -210,6 +273,7 @@ export const App = () => {
             </Box>
             <br></br>
             <ReactMapGL
+                ref={mapRef}
                 mapboxApiAccessToken={mapboxApiKey}
                 mapStyle="mapbox://styles/mapbox/streets-v11"
                 {...viewport}
@@ -217,6 +281,10 @@ export const App = () => {
                 onViewportChange={(viewport) => setViewport(viewport)}
                 onClick={(clickedLocation) => showDialog(clickedLocation)}
             >
+
+                <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} viewport={viewport} handleGeocoderViewportChange={handleGeocoderViewportChange} />
+                <GeoLocater />
+
                 {markerCollection}
             </ReactMapGL>
             <Dialog open={dialogOpen}>
