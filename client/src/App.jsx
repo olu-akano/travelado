@@ -121,6 +121,14 @@ export const App = () => {
         }
     }
 
+    const handleDialog = (clickedLocation) => {
+        showDialog(clickedLocation)
+    }
+
+    const handlePropagation = (e) => {
+        e.stopPropagation()
+        handleDialog()
+    }
 
     const addMarker = () => {
         const lat = currentClickedMarkerLatLng[0]
@@ -246,7 +254,7 @@ export const App = () => {
                 {...viewport}
                 {...mapStyle}
                 onViewportChange={(viewport) => setViewport(viewport)}
-                onClick={(clickedLocation) => showDialog(clickedLocation)}
+                onClick={handlePropagation}
             >
                 <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} viewport={viewport} handleGeocoderViewportChange={handleGeocoderViewportChange} />
                 <GeoLocater />
