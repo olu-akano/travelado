@@ -7,18 +7,22 @@
     margin-left: -25%;
     top: 10px;
 } */
-/* .mapboxgl-ctrl-geocoder  {
-    min-width: 100%;
-    min-width: 100%;
+
+/* 
+.mapboxgl-ctrl-geocoder, .mapboxgl-ctrl {
     color: red;
-    position: absolute;
-    z-index: 1;
-    width: 50%;
-    left: 50%;
-    margin-left: -25%;
-    top: 10px;
+    margin: 0px 670px 10px 10px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 } */
 
+
+/* .mapboxgl-ctrl {
+    margin: 0px 670px 10px 10px;
+    float: right;
+} */
 /* .mapboxgl-ctrl-geocoder--input {
     min-width: 100%;
     color: red;

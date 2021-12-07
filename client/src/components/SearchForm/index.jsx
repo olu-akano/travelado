@@ -28,6 +28,7 @@ export const SearchForm = ({ mapRef, mapboxApiKey, handleGeocoderViewportChange,
                 onViewportChange={handleGeocoderViewportChange}
                 mapboxApiAccessToken={mapboxApiKey}
                 position="top-right"
+
             />
 
 
