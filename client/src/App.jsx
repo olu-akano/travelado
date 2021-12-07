@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import './style.css';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
-// import Geocoder from 'react-map-gl-geocoder'
+
 
 
 import { GeoLocater, SearchForm } from './components'
@@ -233,7 +233,7 @@ export const App = () => {
 
             >
 
-                <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} viewport={viewport} handleGeocoderViewportChange={handleGeocoderViewportChange} />
+                <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} handleGeocoderViewportChange={handleGeocoderViewportChange} />
                 <GeoLocater />
 
                 {markerCollection}
