@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'social_django',
     'django_extensions',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -156,6 +157,8 @@ SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv('FACEBOOK_SECRET')
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home'
+
+SITE_ID = 1
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 

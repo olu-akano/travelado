@@ -64,7 +64,7 @@ def password(request):
 def current_user(request):
     secret = os.getenv('TOKEN_SECRET')
     user = request.user
-    encoded_jwt = jwt.encode({"username": user.username}, secret, algorithm="HS256")
+    encoded_jwt = jwt.encode({"username": user.username, "source": "travelado"}, secret, algorithm="HS256")
     return JsonResponse({
       'token' : encoded_jwt,
     })
