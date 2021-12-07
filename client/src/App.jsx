@@ -128,10 +128,7 @@ export const App = () => {
         showDialog(clickedLocation)
     }
 
-    // const handlePropagation = (e) => {
-    //     e.stopPropagation()
-    //     handleDialog()
-    // }
+
 
     const addMarker = () => {
         const lat = currentClickedMarkerLatLng[0]
