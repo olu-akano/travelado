@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import axios from 'axios'
 import cheerio from 'cheerio'
 
+// CORS issues, need to fix
+
 export const WebScraper = () => {
 
 

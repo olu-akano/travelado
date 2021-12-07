@@ -4,7 +4,7 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 
 
 
-import { GeoLocater, SearchForm, RegisterOrLogin, WebScraper } from './components'
+import { GeoLocater, SearchForm, RegisterOrLogin, WebScraper, CovidData } from './components'
 
 
 
@@ -68,6 +68,7 @@ export const App = () => {
 
     const mapRef = useRef();
     const geocoderContainerRef = useRef();
+    const mapboxElRef = useRef(null);
     const handleViewportChange = useCallback(
         (newViewport) => setViewport(newViewport),
         []
@@ -114,7 +115,6 @@ export const App = () => {
     const showDialog = (clickedLocation) => {
         let lat = clickedLocation.lngLat[1]
         let lng = clickedLocation.lngLat[0]
-        // clickedLocation.stopPropagation()
         clickedLocation.stopImmediatePropagation()
         console.log(clickedLocation)
 
@@ -259,7 +259,9 @@ export const App = () => {
                 onDblClick={handleDialog}
             >
                 <RegisterOrLogin />
-                <WebScraper />
+                <CovidData   mapboxElRef={mapboxElRef}/>
+
+                {/* <WebScraper /> */}
 
                 <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} geocoderContainerRef={geocoderContainerRef} handleGeocoderViewportChange={handleGeocoderViewportChange} />
 
