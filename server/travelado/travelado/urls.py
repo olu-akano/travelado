@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView
+from rest_framework.documentation import include_docs_urls
 
 urlpatterns = [
-    path('', include('reviews.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view(), name='logout'),
+    path('reviews/', include("reviews.urls")),
+    path('docs/', include_docs_urls(title = 'Reviews API')),
 ]

@@ -7,6 +7,9 @@ from social_django.models import UserSocialAuth
 from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
+from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView, UpdateAPIView
+from .models import Reviews
+from .serializers import ReviewsSerializer
 from dotenv import load_dotenv
 from pathlib import Path
 import os
@@ -65,3 +68,21 @@ def current_user(request):
     return JsonResponse({
       'token' : encoded_jwt,
     })
+
+# Create your views here.
+class ListReviewsView(ListAPIView):
+    queryset = Reviews.objects.all()
+    serializer_class = ReviewsSerializer
+
+class CreateReviewsView(CreateAPIView):
+    queryset = Reviews.objects.all()
+    serializer_class = ReviewsSerializer
+
+class UpdateReviewsView(UpdateAPIView):
+    queryset = Reviews.objects.all()
+    serializer_class = ReviewsSerializer
+
+class DeleteReviewsView(DestroyAPIView):
+    queryset = Reviews.objects.all()
+    serializer_class = ReviewsSerializer
+
