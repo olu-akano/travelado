@@ -4,7 +4,6 @@ from django.contrib.auth.views import LoginView, LogoutView
 from . import views
 
 urlpatterns = [
-   #path('', views.index, name='index'),
    path('', views.home, name='home'),
    path('login/', LoginView.as_view(), name='login'),
    path('logout/', LoginView.as_view(), name='logout'),
@@ -13,4 +12,8 @@ urlpatterns = [
    path('oauth/', include('social_django.urls', namespace='social')),
    path('admin/', admin.site.urls),
    path('current/', views.current_user, name='current_user'),
+   path('home/', views.ListReviewsView.as_view(), name='list_reviews'),
+   path("create/", views.CreateReviewsView.as_view(),name="create_review"),
+   path("update/<int:pk>/",views.UpdateReviewsView.as_view(),name="update_review"),
+   path("delete/<int:pk>/",views.DeleteReviewsView.as_view(),name="delete_review")
 ]
