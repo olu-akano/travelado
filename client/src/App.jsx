@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import './style.css';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
-// import Geocoder from 'react-map-gl-geocoder'
+
 
 
 import { GeoLocater, SearchForm } from './components'
@@ -52,9 +52,7 @@ export const App = () => {
     const [commentField, setCommentField] = useState("");
     const [ratingField, setRatingField] = useState(0);
     const [formError, setFormError] = useState(false);
-
     const [currentUser, setCurrentUser] = useState("Saja");
-    const mapRef = useRef();
     const [auth, setAuth] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
     const [viewport, setViewport] = useState(
@@ -68,6 +66,8 @@ export const App = () => {
     const [selectedMarker, setSelectedMarker] = useState({});
     const [showPopup, setShowPopup] = useState(false);
 
+    const mapRef = useRef();
+    const geocoderContainerRef = useRef();
     const handleViewportChange = useCallback(
         (newViewport) => setViewport(newViewport),
         []
@@ -114,6 +114,9 @@ export const App = () => {
     const showDialog = (clickedLocation) => {
         let lat = clickedLocation.lngLat[1]
         let lng = clickedLocation.lngLat[0]
+        // clickedLocation.stopPropagation()
+        clickedLocation.stopImmediatePropagation()
+        console.log(clickedLocation)
 
         if (auth) {
             setcurrentClickedMarkerLatLng([lat, lng])
@@ -125,10 +128,7 @@ export const App = () => {
         showDialog(clickedLocation)
     }
 
-    const handlePropagation = (e) => {
-        e.stopPropagation()
-        handleDialog()
-    }
+
 
     const addMarker = () => {
         const lat = currentClickedMarkerLatLng[0]
@@ -247,6 +247,8 @@ export const App = () => {
                 </AppBar>
             </Box>
             <br></br>
+
+
             <ReactMapGL
                 ref={mapRef}
                 mapboxApiAccessToken={mapboxApiKey}
@@ -254,10 +256,11 @@ export const App = () => {
                 {...viewport}
                 {...mapStyle}
                 onViewportChange={(viewport) => setViewport(viewport)}
-                onClick={handlePropagation}
+                onDblClick={handleDialog}
             >
-                <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} viewport={viewport} handleGeocoderViewportChange={handleGeocoderViewportChange} />
-                <GeoLocater />
+
+                <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} geocoderContainerRef={geocoderContainerRef} handleGeocoderViewportChange={handleGeocoderViewportChange} />
+                {/* <GeoLocater /> */}
 
                 {markerCollection}
                 {showPopup && (<Popup
@@ -275,6 +278,7 @@ export const App = () => {
                 </Popup>)}
 
             </ReactMapGL>
+
             <Dialog open={dialogOpen} onClose={handleDialogClose}>
                 <DialogTitle>Trevalado Marker</DialogTitle>
                 <DialogContent>
@@ -328,7 +332,3 @@ export const App = () => {
         </>
     );
 }
-
-
-
-
