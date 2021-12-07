@@ -1,3 +1,10 @@
-from django.test import TestCase
+from django.test import TestCase, Client
+from django.urls import reverse
 
-# Create your tests here.
+
+class TestViews(TestCase):
+    client = Client()
+
+    def test_index(self):
+         response = self.client.get(reverse('index'))
+         assert "index.html" in [t.name for t in response.templates]
