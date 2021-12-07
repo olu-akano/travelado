@@ -15,7 +15,3 @@ export const SearchForm = ({ mapRef, mapboxApiKey, handleGeocoderViewportChange 
         </>
     )
 }
-
-
-
-
