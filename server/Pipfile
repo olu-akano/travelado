@@ -11,3 +11,7 @@ django-allauth = "*"
 
 [requires]
 python_version = "3.9"
+
+[scripts]
+https = "python manage.py runserver_plus --cert-file cert.pem --key-file key.pem"
+
