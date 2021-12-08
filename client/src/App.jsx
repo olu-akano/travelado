@@ -31,8 +31,8 @@ import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 
 const mapStyle = {
-    width: '100%',
-    height: 600
+    width: '100vw',
+    height: '100vh'
 }
 
 const mapboxApiKey = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWNyd2sifQ.L5VJBCeE8JNppDI41T7CpQ';
