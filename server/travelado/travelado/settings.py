@@ -82,7 +82,10 @@ WSGI_APPLICATION = 'travelado.wsgi.application'
 DATABASES={
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'travelado',
+        'NAME': 'travelado-app',
+        'CLIENT': {
+            'host': 'mongodb+srv://olu:42Ve?3`.6~HPmpr@travelado-app.y8twz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+        }
     }
 } 
 
