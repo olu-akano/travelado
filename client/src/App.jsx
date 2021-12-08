@@ -58,7 +58,7 @@ export const App = () => {
 
     const [markers, setMarkers] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState({});
-    // Added covidDataCountries
+
     const [covidDataCountries, setCovidDataCountries] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
 
@@ -180,7 +180,7 @@ export const App = () => {
 
     return (
         <>
-            <Box sx={{ flexGrow: 1 }}>
+            {/* <Box sx={{ flexGrow: 1 }}>
                 <FormGroup>
                     <FormControlLabel
                         control={
@@ -241,7 +241,7 @@ export const App = () => {
                         )}
                     </Toolbar>
                 </AppBar>
-            </Box>
+            </Box> */}
 
 
 
@@ -259,8 +259,7 @@ export const App = () => {
                 <CovidData setCovidDataCountries={setCovidDataCountries}/>
                 <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} geocoderContainerRef={geocoderContainerRef} handleGeocoderViewportChange={handleGeocoderViewportChange} />
 
-                {/* <GeoLocater /> */}
-
+            
                 {markerCollection}
                 {showPopup && (<Popup
                     latitude={selectedMarker.latitude}
