@@ -9,3 +9,4 @@ djangorestframework-simplejwt
 coreapi
 pyyaml
 pyopenssl
+social-auth-app-django
