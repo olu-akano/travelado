@@ -64,10 +64,11 @@ def password(request):
 def current_user(request):
     secret = os.getenv('TOKEN_SECRET')
     user = request.user
-    encoded_jwt = jwt.encode({"username": user.username}, secret, algorithm="HS256")
+    encoded_jwt = jwt.encode({"username": user.username, "source": "travelado"}, secret, algorithm="HS256")
     return JsonResponse({
       'token' : encoded_jwt,
     })
+
 
 # Create your views here.
 class ListReviewsView(ListAPIView):
@@ -86,3 +87,7 @@ class DeleteReviewsView(DestroyAPIView):
     queryset = Reviews.objects.all()
     serializer_class = ReviewsSerializer
 
+# secret = os.getenv('TOKEN_SECRET')
+# token = '{"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFrYW5vcGF1bC5zcCIsInNvdXJjZSI6InRyYXZlbGFkbyJ9.1iBESx4XcycK_VPPCgcE80S2IKH3-A-3P8N4xBQpnUI"}'
+# decoded = jwt.decode(token, secret, algorithms=['HS256'])
+# print(decoded['username'])

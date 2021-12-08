@@ -4,7 +4,7 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 
 
 
-import { GeoLocater, SearchForm, RegisterOrLogin, WebScraper, CovidData } from './components'
+import { GeoLocater, SearchForm, RegisterOrLogin, CovidData, CountrySelect } from './components'
 
 
 
@@ -30,19 +30,13 @@ import TextField from '@mui/material/TextField';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 
-
-
-import mapboxgl from '!mapbox-gl';
-
-mapboxgl.accessToken = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWNyd2sifQ.L5VJBCeE8JNppDI41T7CpQ';
-// hide access token
-
 const mapStyle = {
     width: '100vw',
     height: '100vh'
 }
 
 const mapboxApiKey = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWNyd2sifQ.L5VJBCeE8JNppDI41T7CpQ';
+// hide access token
 
 export const App = () => {
 
@@ -64,6 +58,8 @@ export const App = () => {
 
     const [markers, setMarkers] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState({});
+    // Added covidDataCountries
+    const [covidDataCountries, setCovidDataCountries] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
 
     const mapRef = useRef();
@@ -259,6 +255,7 @@ export const App = () => {
                 onDblClick={handleDialog}
             >
                 <RegisterOrLogin />
+                  
                 {/* <CovidData   mapboxElRef={mapboxElRef}/> */}
 
                 {/* <WebScraper /> */}
@@ -283,7 +280,9 @@ export const App = () => {
                 </Popup>)}
 
             </ReactMapGL>
-
+            {covidDataCountries.length && (
+                    <CountrySelect covidDataCountries={covidDataCountries} />
+            )}
             <Dialog open={dialogOpen} onClose={handleDialogClose}>
                 <DialogTitle>Trevalado Marker</DialogTitle>
                 <DialogContent>
