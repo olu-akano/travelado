@@ -83,12 +83,9 @@ DATABASES={
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'travelado-app',
-<<<<<<< HEAD
         'CLIENT': {
             'host': 'mongodb+srv://olu:42Ve?3`.6~HPmpr@travelado-app.y8twz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
         }
-=======
->>>>>>> 7b90ae3cdeee8491217000ccf78da04923bbd62f
     }
 } 
 
