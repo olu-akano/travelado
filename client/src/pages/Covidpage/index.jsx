@@ -4,7 +4,7 @@ import ReactMapGL from 'react-map-gl';
 
 
 
-import {RegisterOrLogin, CovidData, CountrySelect } from '../../components'
+import { RegisterOrLogin, CovidData, CountrySelect } from '../../components'
 
 
 const mapStyle = {
@@ -17,7 +17,7 @@ const mapboxApiKey = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWN
 
 export const Covidpage = () => {
 
-    
+
     // const [currentUser, setCurrentUser] = useState("Saja");
     // const [auth, setAuth] = useState(true);
     // const [anchorEl, setAnchorEl] = useState(null);
@@ -38,7 +38,7 @@ export const Covidpage = () => {
     //     []
     // );
 
-     
+
 
     // events
     // const handleChange = (event) => {
@@ -48,7 +48,7 @@ export const Covidpage = () => {
 
 
 
-    
+
 
 
 
@@ -74,13 +74,13 @@ export const Covidpage = () => {
                 <CovidData setCovidDataCountries={setCovidDataCountries} />
 
 
-    
+
 
             </ReactMapGL>
             {covidDataCountries.length && (
                 <CountrySelect covidDataCountries={covidDataCountries} />
             )}
-          
+
         </>
     );
 }

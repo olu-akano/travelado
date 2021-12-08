@@ -1,26 +1,10 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { Switch, Route } from "react-router-dom";
-// import './style.css';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import './style.css';
 
 
 
-import { GeoLocater, SearchForm, RegisterOrLogin, CovidData, CountrySelect, WebScraper } from '../../components'
-
-
-
-// import AppBar from '@mui/material/AppBar';
-// import Box from '@mui/material/Box';
-// import Toolbar from '@mui/material/Toolbar';
-// import Typography from '@mui/material/Typography';
-// import IconButton from '@mui/material/IconButton';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import AccountCircle from '@mui/icons-material/AccountCircle';
-// import Switch from '@mui/material/Switch';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import FormGroup from '@mui/material/Forfix'mGroup';
-// import MenuItem from '@mui/material/MenuItem';
-// import Menu from '@mui/material/Menu';
+import { GeoLocater, SearchForm, RegisterOrLogin } from '../../components'
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -60,7 +44,6 @@ export const Homepage = () => {
     const [markers, setMarkers] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState({});
 
-    const [covidDataCountries, setCovidDataCountries] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
 
     const mapRef = useRef();
@@ -193,8 +176,10 @@ export const Homepage = () => {
             >
                 <RegisterOrLogin />
                 <br></br>
-                <CovidData setCovidDataCountries={setCovidDataCountries} />
+
+
                 <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} geocoderContainerRef={geocoderContainerRef} handleGeocoderViewportChange={handleGeocoderViewportChange} />
+
 
 
                 {markerCollection}
@@ -213,6 +198,7 @@ export const Homepage = () => {
                 </Popup>)}
 
             </ReactMapGL>
+
             <Dialog open={dialogOpen} onClose={handleDialogClose}>
                 <DialogTitle>Trevalado Marker</DialogTitle>
                 <DialogContent>
