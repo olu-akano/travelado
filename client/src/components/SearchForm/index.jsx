@@ -2,7 +2,6 @@ import React from 'react'
 import Geocoder from 'react-map-gl-geocoder'
 import './style.css'
 
-
 export const SearchForm = ({ mapRef, mapboxApiKey, handleGeocoderViewportChange, geocoderContainerRef }) => {
 
     return (

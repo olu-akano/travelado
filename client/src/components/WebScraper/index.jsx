@@ -7,9 +7,6 @@ import cheerio from 'cheerio'
 export const WebScraper = () => {
 
 
-
-    // const url = 'https://www.gov.uk/guidance/red-list-of-countries-and-territories';
-
     useEffect(() => {
         axios(url)
             .then(res => {
