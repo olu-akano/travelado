@@ -1,7 +1,10 @@
 from django.contrib.auth.models import User
 from django.test import TestCase, Client
+import pytest
 from django.urls import reverse
 import json
+
+pytestmark = pytest.mark.django_db
 
 class BaseTestCase(TestCase):
     
@@ -25,3 +28,9 @@ class TestAuthViews(BaseTestCase):
     def setUp(self):
         self.client = Client()
         self.client.login(username="username", password="test56user")
+    
+    def test_home_page_load(self):
+        response = self.client.get(reverse('home'))
+        self.assertRedirects(response, expected_url="/login/?next=/", status_code=302)
+
+    

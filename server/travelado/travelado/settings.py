@@ -157,9 +157,3 @@ LOGIN_REDIRECT_URL = 'home'
 
 SITE_ID = 1
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package=reviews,travelado'
-]
