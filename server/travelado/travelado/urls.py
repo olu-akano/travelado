@@ -1,5 +1,6 @@
-"""travelado URL Configuration
 
+   
+"""travelado URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
@@ -16,11 +17,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
-from django.contrib.auth.views import LogoutView
+from django.contrib.auth.views import LoginView, LogoutView
+from rest_framework.documentation import include_docs_urls
+from reviews import views
 
 urlpatterns = [
-    path('', include('reviews.urls')),
+    path('', views.home, name='home'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('signup/', views.signup, name='signup'),
+    path('password/', views.password, name='password'),
+    path('oauth/', include('social_django.urls', namespace='social')),
+    path('admin/', admin.site.urls),
+    path('current/', views.current_user, name='current_user'),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('logout', LogoutView.as_view()),
+    path('reviews/', include("reviews.urls")),
+    path('docs/', include_docs_urls(title = 'Reviews API')),
 ]
