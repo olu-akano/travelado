@@ -38,8 +38,8 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4d
 // hide access token
 
 const mapStyle = {
-    width: '100%',
-    height: 600
+    width: '100vw',
+    height: '100vh'
 }
 
 const mapboxApiKey = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWNyd2sifQ.L5VJBCeE8JNppDI41T7CpQ';
@@ -57,9 +57,9 @@ export const App = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [viewport, setViewport] = useState(
         {
-            latitude: 51.5072,
-            longitude: 0.1276,
-            zoom: 10
+            latitude: 40.7306,
+            longitude: 34.4710,
+            zoom: 1.2
         });
 
     const [markers, setMarkers] = useState([]);
@@ -184,7 +184,7 @@ export const App = () => {
 
     return (
         <>
-            <Box sx={{ flexGrow: 1 }}>
+            {/* <Box sx={{ flexGrow: 1 }}>
                 <FormGroup>
                     <FormControlLabel
                         control={
@@ -245,7 +245,7 @@ export const App = () => {
                         )}
                     </Toolbar>
                 </AppBar>
-            </Box>
+            </Box> */}
 
 
 
@@ -259,7 +259,7 @@ export const App = () => {
                 onDblClick={handleDialog}
             >
                 <RegisterOrLogin />
-                <CovidData   mapboxElRef={mapboxElRef}/>
+                {/* <CovidData   mapboxElRef={mapboxElRef}/> */}
 
                 {/* <WebScraper /> */}
 
