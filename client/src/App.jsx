@@ -4,7 +4,7 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 
 
 
-import { GeoLocater, SearchForm, RegisterOrLogin, CovidData, CountrySelect } from './components'
+import { GeoLocater, SearchForm, RegisterOrLogin, CovidData, CountrySelect, WebScraper } from './components'
 
 
 
@@ -255,7 +255,7 @@ export const App = () => {
                 onDblClick={handleDialog}
             >
                 <RegisterOrLogin />
-                  
+
                 {/* <CovidData   mapboxElRef={mapboxElRef}/> */}
 
                 {/* <WebScraper /> */}
@@ -281,7 +281,7 @@ export const App = () => {
 
             </ReactMapGL>
             {covidDataCountries.length && (
-                    <CountrySelect covidDataCountries={covidDataCountries} />
+                <CountrySelect covidDataCountries={covidDataCountries} />
             )}
             <Dialog open={dialogOpen} onClose={handleDialogClose}>
                 <DialogTitle>Trevalado Marker</DialogTitle>
