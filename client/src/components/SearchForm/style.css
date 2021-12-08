@@ -1,3 +1,7 @@
+* {
+    margin : 0
+}
+
 /* 
 .geocoder {
     position: absolute;
@@ -8,15 +12,12 @@
     top: 10px;
 } */
 
-/* 
-.mapboxgl-ctrl-geocoder, .mapboxgl-ctrl {
+/* .mapboxgl-ctrl-geocoder, .mapboxgl-ctrl {
     color: red;
     margin: 0px 670px 10px 10px;
     float: right;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-} */
+
+}  */
 
 
 /* .mapboxgl-ctrl {

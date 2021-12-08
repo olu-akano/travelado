@@ -180,7 +180,7 @@ export const App = () => {
 
     return (
         <>
-            <Box sx={{ flexGrow: 1 }}>
+            {/* <Box sx={{ flexGrow: 1 }}>
                 <FormGroup>
                     <FormControlLabel
                         control={
@@ -241,7 +241,7 @@ export const App = () => {
                         )}
                     </Toolbar>
                 </AppBar>
-            </Box>
+            </Box> */}
 
 
 
@@ -255,8 +255,11 @@ export const App = () => {
                 onDblClick={handleDialog}
             >
                 <RegisterOrLogin />
-                <br></br>
-                <CovidData setCovidDataCountries={setCovidDataCountries}/>
+                  
+                {/* <CovidData   mapboxElRef={mapboxElRef}/> */}
+
+                {/* <WebScraper /> */}
+
                 <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} geocoderContainerRef={geocoderContainerRef} handleGeocoderViewportChange={handleGeocoderViewportChange} />
 
                 {/* <GeoLocater /> */}
