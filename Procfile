@@ -1,1 +1,2 @@
-web: gunicorn server/travelado.wsgi
+release: python manage.py migrate
+web: gunicorn travelado.wsgi
