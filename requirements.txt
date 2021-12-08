@@ -4,10 +4,8 @@ python-dotenv
 django-allauth
 coverage
 model-bakery
-python-social-auth
 django-extensions
 djangorestframework-simplejwt
 coreapi
 pyyaml
 pyopenssl
-social_django
