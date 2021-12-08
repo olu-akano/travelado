@@ -4,7 +4,7 @@ import ReactMapGL from 'react-map-gl';
 
 
 
-import { RegisterOrLogin, CovidData, CountrySelect } from '../../components'
+import { RegisterOrLogin, CovidData, CountrySelect, HomePageButton } from '../../components'
 
 
 const mapStyle = {
@@ -48,19 +48,13 @@ export const Covidpage = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
     return (
         <>
 
+            {covidDataCountries.length && (
+                <CountrySelect covidDataCountries={covidDataCountries} />
+            )}
+            <br></br>
             <ReactMapGL
                 ref={mapRef}
                 mapboxApiAccessToken={mapboxApiKey}
@@ -71,15 +65,14 @@ export const Covidpage = () => {
             >
                 <RegisterOrLogin />
                 <br></br>
+                <HomePageButton />
+
                 <CovidData setCovidDataCountries={setCovidDataCountries} />
 
 
 
 
             </ReactMapGL>
-            {covidDataCountries.length && (
-                <CountrySelect covidDataCountries={covidDataCountries} />
-            )}
 
         </>
     );

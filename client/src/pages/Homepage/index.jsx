@@ -4,7 +4,7 @@ import './style.css';
 
 
 
-import { GeoLocater, SearchForm, RegisterOrLogin } from '../../components'
+import { GeoLocater, SearchForm, RegisterOrLogin, CovidButton } from '../../components'
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -176,7 +176,7 @@ export const Homepage = () => {
             >
                 <RegisterOrLogin />
                 <br></br>
-
+                <CovidButton />
 
                 <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} geocoderContainerRef={geocoderContainerRef} handleGeocoderViewportChange={handleGeocoderViewportChange} />
 
