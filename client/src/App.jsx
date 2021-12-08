@@ -4,7 +4,7 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 
 
 
-import { GeoLocater, SearchForm } from './components'
+import { GeoLocater, SearchForm, RegisterOrLogin, CovidData, CountrySelect } from './components'
 
 
 
@@ -30,19 +30,13 @@ import TextField from '@mui/material/TextField';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 
-
-
-import mapboxgl from '!mapbox-gl';
-
-mapboxgl.accessToken = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWNyd2sifQ.L5VJBCeE8JNppDI41T7CpQ';
-// hide access token
-
 const mapStyle = {
     width: '100%',
     height: 600
 }
 
 const mapboxApiKey = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWNyd2sifQ.L5VJBCeE8JNppDI41T7CpQ';
+// hide access token
 
 export const App = () => {
 
@@ -57,17 +51,20 @@ export const App = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [viewport, setViewport] = useState(
         {
-            latitude: 51.5072,
-            longitude: 0.1276,
-            zoom: 10
+            latitude: 40.7306,
+            longitude: 34.4710,
+            zoom: 1.2
         });
 
     const [markers, setMarkers] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState({});
+    // Added covidDataCountries
+    const [covidDataCountries, setCovidDataCountries] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
 
     const mapRef = useRef();
     const geocoderContainerRef = useRef();
+    const mapboxElRef = useRef(null);
     const handleViewportChange = useCallback(
         (newViewport) => setViewport(newViewport),
         []
@@ -114,7 +111,6 @@ export const App = () => {
     const showDialog = (clickedLocation) => {
         let lat = clickedLocation.lngLat[1]
         let lng = clickedLocation.lngLat[0]
-        // clickedLocation.stopPropagation()
         clickedLocation.stopImmediatePropagation()
         console.log(clickedLocation)
 
@@ -246,7 +242,7 @@ export const App = () => {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <br></br>
+
 
 
             <ReactMapGL
@@ -258,8 +254,11 @@ export const App = () => {
                 onViewportChange={(viewport) => setViewport(viewport)}
                 onDblClick={handleDialog}
             >
-
+                <RegisterOrLogin />
+                <br></br>
+                <CovidData setCovidDataCountries={setCovidDataCountries}/>
                 <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} geocoderContainerRef={geocoderContainerRef} handleGeocoderViewportChange={handleGeocoderViewportChange} />
+
                 {/* <GeoLocater /> */}
 
                 {markerCollection}
@@ -278,7 +277,9 @@ export const App = () => {
                 </Popup>)}
 
             </ReactMapGL>
-
+            {covidDataCountries.length && (
+                    <CountrySelect covidDataCountries={covidDataCountries} />
+            )}
             <Dialog open={dialogOpen} onClose={handleDialogClose}>
                 <DialogTitle>Trevalado Marker</DialogTitle>
                 <DialogContent>

@@ -47,6 +47,3 @@ transform: rotateZ(135deg)
 background: red;
 }
 
-#canvas {
-    touch-action: none;
-}
