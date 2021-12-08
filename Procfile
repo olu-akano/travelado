@@ -1,1 +1,1 @@
-web: gunicorn travelado.wsgi--log-file -
+web: gunicorn travelado.travelado.wsgi
