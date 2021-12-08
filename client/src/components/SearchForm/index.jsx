@@ -1,33 +1,26 @@
 import React from 'react'
 import Geocoder from 'react-map-gl-geocoder'
-import './style.css'
 
-export const SearchForm = ({ mapRef, mapboxApiKey, handleGeocoderViewportChange, geocoderContainerRef }) => {
-    // const geolocateControlStyle = {
-    //     left: 10,
-    //     top: 10
-    // };
+export const SearchForm = ({ mapRef, mapboxApiKey, handleGeocoderViewportChange }) => {
+    let geocoderContainerRef = React.createRef();
 
     return (
         <>
-            {/* <div
+            <div
                 ref={geocoderContainerRef}
                 style={{
-                    position: "absolute",
-                    top: 20,
-                    left: 20,
+                    marginLeft: '45%',
+                    marginTop: -50,
                     zIndex: 1,
                     width: 50
 
                 }}
-            /> */}
+            />
             <Geocoder
-                // style={geolocateControlStyle}
                 containerRef={geocoderContainerRef}
                 mapRef={mapRef}
                 onViewportChange={handleGeocoderViewportChange}
                 mapboxApiAccessToken={mapboxApiKey}
-                position="top-right"
 
             />
 
