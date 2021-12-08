@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'travelado.wsgi.application'
 DATABASES={
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'travelado',
+        'NAME': 'travelado-app',
     }
 } 
 
