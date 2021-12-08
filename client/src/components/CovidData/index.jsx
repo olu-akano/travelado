@@ -3,6 +3,7 @@ import ReactMapGL, { Marker, Popup, Layer, Source } from 'react-map-gl';
 import useSWR from 'swr';
 import lookup from 'country-code-lookup';
 
+// import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const CovidData = ({ setCovidDataCountries }) => {
     const fetcher = (url) =>
@@ -26,8 +27,12 @@ export const CovidData = ({ setCovidDataCountries }) => {
                 }))
             });
 
+    // Fetching our data with swr package
     const { data, error } = useSWR('https://disease.sh/v3/covid-19/countries', fetcher);
+    // If the data hasn't loaded yet then show a loading div.
+    // This means that code below the line below will NOT run.
     if (!data) return <div>loading...</div>
+    // If !data code below here will not run.
     setCovidDataCountries(data)
     const average = data.reduce((total, next) => total + Number(next.properties.cases), 0) / data.length;
     const min = Math.min(...data.map((item) => Number(item.properties.cases)));
@@ -35,9 +40,9 @@ export const CovidData = ({ setCovidDataCountries }) => {
 
     const layerStyle = {
         id: 'circles',
-        source: 'points',
+        source: 'points', // this should be the id of the source
         type: 'circle',
-
+        // paint properties
         paint: {
             'circle-opacity': 0.75,
             'circle-stroke-width': 1,
