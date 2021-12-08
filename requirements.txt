@@ -11,3 +11,4 @@ pyyaml
 pyopenssl
 social-auth-app-django
 djongo
+pytz
