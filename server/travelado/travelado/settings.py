@@ -28,7 +28,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django_nose',
     'reviews.apps.ReviewsConfig',
     'allauth',
     'django.contrib.admin',

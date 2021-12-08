@@ -1,3 +1,12 @@
 gunicorn
 django-heroku
 python-dotenv
+django-allauth
+coverage
+model-bakery
+python-social-auth = {extras = ["django"], version}
+django-extensions
+djangorestframework-simplejwt
+coreapi
+pyyaml
+pyopenssl
