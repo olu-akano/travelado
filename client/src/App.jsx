@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import './style.css';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import './style.css';
 
 
 
@@ -32,7 +32,7 @@ import Button from '@mui/material/Button';
 
 const mapStyle = {
     width: '100vw',
-    height: '100vh'
+    height: 600
 }
 
 const mapboxApiKey = 'pk.eyJ1Ijoic2FqYTM2IiwiYSI6ImNrd3JtMWtzazBpM2syb285dTN4dWNyd2sifQ.L5VJBCeE8JNppDI41T7CpQ';
