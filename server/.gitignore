@@ -2,3 +2,4 @@
 *.sqlite3
 .coverage
 *__pycache__
+Pipfile.lock

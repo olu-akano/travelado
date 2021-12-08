@@ -1,0 +1,15 @@
+gunicorn
+django-heroku
+python-dotenv
+django-allauth
+coverage
+model-bakery
+django-extensions
+djangorestframework-simplejwt
+coreapi
+pyyaml
+pyopenssl
+social-auth-app-django
+djongo
+pytz
+python == "*"
