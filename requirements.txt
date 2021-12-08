@@ -10,3 +10,4 @@ coreapi
 pyyaml
 pyopenssl
 social-auth-app-django
+djongo
