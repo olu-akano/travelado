@@ -1,5 +1,4 @@
 .env
 *.sqlite3
-settings.py
 .coverage
 *__pycache__

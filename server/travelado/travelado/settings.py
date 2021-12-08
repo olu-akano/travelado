@@ -25,8 +25,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-SITE_ID = 1
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -82,12 +80,13 @@ WSGI_APPLICATION = 'travelado.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
+DATABASES={
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'travelado',
     }
-}
+} 
+
 
 
 # Password validation
@@ -157,9 +156,3 @@ LOGIN_REDIRECT_URL = 'home'
 
 SITE_ID = 1
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package=reviews,travelado'
-]
