@@ -4,7 +4,7 @@ python-dotenv
 django-allauth
 coverage
 model-bakery
-python-social-auth = {extras = ["django"], version}
+python-social-auth
 django-extensions
 djangorestframework-simplejwt
 coreapi
