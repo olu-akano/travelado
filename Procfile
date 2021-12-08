@@ -1,1 +1,1 @@
-web: gunicorn travelado-server.wsgi
+web: gunicorn server/travelado.wsgi
