@@ -38,7 +38,7 @@ export const Covidpage = () => {
     //     []
     // );
 
-    
+     
 
     // events
     // const handleChange = (event) => {
