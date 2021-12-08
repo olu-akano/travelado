@@ -64,6 +64,8 @@ export const App = () => {
 
     const [markers, setMarkers] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState({});
+    const [covidDataCountries, setCovidDataCountries] = useState([]);
+
     const [showPopup, setShowPopup] = useState(false);
 
     const mapRef = useRef();
@@ -259,10 +261,8 @@ export const App = () => {
                 onDblClick={handleDialog}
             >
                 <RegisterOrLogin />
-                <CovidData   mapboxElRef={mapboxElRef}/>
-
-                {/* <WebScraper /> */}
-
+                <br></br>
+                <CovidData setCovidDataCountries={setCovidDataCountries} />
                 <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} geocoderContainerRef={geocoderContainerRef} handleGeocoderViewportChange={handleGeocoderViewportChange} />
 
                 {/* <GeoLocater /> */}
@@ -283,7 +283,9 @@ export const App = () => {
                 </Popup>)}
 
             </ReactMapGL>
-
+            {covidDataCountries.length && (
+                <CountrySelect covidDataCountries={covidDataCountries} />
+            )}
             <Dialog open={dialogOpen} onClose={handleDialogClose}>
                 <DialogTitle>Trevalado Marker</DialogTitle>
                 <DialogContent>
