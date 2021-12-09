@@ -33,6 +33,7 @@ export const Homepage = () => {
     const [ratingField, setRatingField] = useState(0);
     const [formError, setFormError] = useState(false);
     const [currentUser, setCurrentUser] = useState("");
+    const [currentTime, setCurrentTime] = useState('');
     const [auth, setAuth] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
     const [viewport, setViewport] = useState(
@@ -136,6 +137,16 @@ export const Homepage = () => {
         }
     }
 
+    const timeConvert = (timestamp) => {
+        let today = new Date(Number(timestamp));
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+    
+        today = dd + '/' + mm + '/' + yyyy;
+        return today;
+    }
+
     const addMarker = async () => {
         const lat = currentClickedMarkerLatLng[0]
         const lng = currentClickedMarkerLatLng[1]
@@ -146,7 +157,8 @@ export const Homepage = () => {
                 title: titleField,
                 body: commentField,
                 rating: ratingField,
-                username: currentUser
+                username: localStorage.getItem('username'),
+                date: timeConvert(new Date().getTime())
             }
             setMarkers([
                 ...markers,
@@ -202,11 +214,11 @@ export const Homepage = () => {
                 onDblClick={handleDialog}
             >
                 <RegisterOrLogin />
-                <br></br>
-                <CovidButton />
+                {/* <br></br> */}
 
                 <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} geocoderContainerRef={geocoderContainerRef} handleGeocoderViewportChange={handleGeocoderViewportChange} />
 
+                <CovidButton />
 
 
                 {markerCollection}
