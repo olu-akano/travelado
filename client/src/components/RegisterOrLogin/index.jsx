@@ -5,19 +5,19 @@ import './style.css'
 
 export const RegisterOrLogin = () => {
     const params = useParams()
-    if(params.username){
+    if (params.username) {
         localStorage.setItem('username', params.username)
     }
-    if(params.token){
+    if (params.token) {
         let token = jwt_decode(params.token);
         console.log(token)
     }
 
     const clearUsername = () => {
-        if(localStorage.getItem('username')){
+        if (localStorage.getItem('username')) {
             localStorage.removeItem('username')
         }
-        if(localStorage.getItem('token')){
+        if (localStorage.getItem('token')) {
             localStorage.removeItem('token')
         }
     }
@@ -44,14 +44,19 @@ export const RegisterOrLogin = () => {
     return (
         <div>
             {params.username ? <div>
-                <h1 className="usernameDisplay">{params.username}</h1>
+                <h3 className="usernameDisplay"> Welcome - {params.username}</h3>
                 <form action="https://127.0.0.1:8000/logout/" onSubmit={clearUsername}>
-                    <input className ="LoginOrSignup" type="submit" value=" Logout " />
+                    <input className="LoginOrSignup" type="submit" value=" Logout " />
                 </form>
-             </div>
-            : <form action="https://127.0.0.1:8000/login/">
-            <input className ="LoginOrSignup" type="submit" value=" Login / Signup " />
-        </form>}
+            </div>
+                :
+                <>
+                    <form action="https://127.0.0.1:8000/login/">
+                        <input className="LoginOrSignup" type="submit" value=" Login / Signup " />
+                    </form>
+
+                </>
+            }
         </div>
     )
 }

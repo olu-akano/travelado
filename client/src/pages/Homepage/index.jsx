@@ -32,7 +32,7 @@ export const Homepage = () => {
     const [commentField, setCommentField] = useState("");
     const [ratingField, setRatingField] = useState(0);
     const [formError, setFormError] = useState(false);
-    const [currentUser, setCurrentUser] = useState("");
+    const [currentUser, setCurrentUser] = useState("hamsa");
     const [currentTime, setCurrentTime] = useState('');
     const [auth, setAuth] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -43,6 +43,7 @@ export const Homepage = () => {
             zoom: 1.2
         });
 
+    const [currentUsername, setCurrentUsername] = useState(localStorage.getItem("username"));
 
     const [markers, setMarkers] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState({});
@@ -184,12 +185,14 @@ export const Homepage = () => {
     markers.forEach((marker, index) => {
         markerCollection.push(
             <Marker
+
                 onClick={() => { handleMarkerClick(marker) }}
                 key={index}
                 longitude={marker.longitude}
                 latitude={marker.latitude}
             >
-                <div className="marker temporary-marker"><span></span></div>
+                <div className={currentUsername === marker.username ? "marker temporary-marker" : "marker notUser"}><span></span></div>
+                {/* // connnect this with username to display the right review tag */}
             </Marker>
         )
     })
@@ -231,7 +234,8 @@ export const Homepage = () => {
                     closeButton={true}
                     closeOnClick={false}
                     onClose={() => setShowPopup(false)}
-                    anchor="top" >
+                    anchor="top"
+                >
                     <div className="card">
                         <label className="review">Place</label>
                         <h4 className="place">{selectedMarker.title}</h4>

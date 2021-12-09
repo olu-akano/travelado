@@ -51,10 +51,13 @@ transform: rotateZ(135deg)
 
 .temporary-marker span {
 background: teal;
+cursor: pointer;
 }
 
-
-
+.notUser span {
+  background: rgb(97, 78, 219);
+  cursor: pointer; 
+}
 
 .card {
     width: 250px;
@@ -84,5 +87,9 @@ background: teal;
     font-size: 12px;
   }
 
+
+  #testing {
+    color: red
+  }
 
   
