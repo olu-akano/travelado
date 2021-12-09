@@ -6,8 +6,6 @@ import { searchReducer } from '../reducers';
 
 const TestProviders = ({ initState }) => {
     initState ||= { date: "", result: { sunrise: "", sunset: "" }, loading: false };
-    let testReducer = () => searchReducer(initState, { type: '@@INIT' })
-    const testStore = createStore(testReducer)
 
     return ({ children }) => (
         <Provider store={testStore}>
@@ -21,5 +19,4 @@ const renderWithReduxProvider = (ui, options={}) => {
     render(ui, { wrapper: TestWrapper, ...options })
 }
 
-global.renderWithReduxProvider = renderWithReduxProvider
 global.React = React;
