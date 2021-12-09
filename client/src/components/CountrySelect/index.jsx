@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-export function CountrySelect({ covidDataCountries }) {
+export function CountrySelect({ covidDataCountries, setViewport }) {
     
   const [currentSelectedCountry, setCurrentSelectedCountry] = React.useState("");
   const displayCountryDetails = () => {
@@ -31,6 +31,11 @@ export function CountrySelect({ covidDataCountries }) {
         size="small"
         onChange={(event, newValue) => {
             setCurrentSelectedCountry(newValue);
+            setViewport({
+                latitude: newValue.geometry.coordinates[1],
+                longitude: newValue.geometry.coordinates[0],
+                zoom: 6
+            })
         }}
         getOptionLabel={(option) => option.properties.country}
         renderOption={(props, option) => (
