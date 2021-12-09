@@ -232,11 +232,20 @@ export const Homepage = () => {
                     closeOnClick={false}
                     onClose={() => setShowPopup(false)}
                     anchor="top" >
-                    <div>{selectedMarker.title}</div>
-                    <div>{selectedMarker.body}</div>
-                    <div>{selectedMarker.rating}/5</div>
-                    <div>{selectedMarker.username}</div>
-                    <div>{selectedMarker.date}</div>
+                    <div className="card">
+                        <label>Place</label>
+                        <h4 className="place">{selectedMarker.title}</h4>
+                        <label>Review</label>
+                        <p>{selectedMarker.body}</p>
+                        <label>Rating</label>
+                        <div> Rating: {selectedMarker.rating}/5</div>
+                        <label>Information</label>
+                        <span className="username">
+                            Created by <b>{selectedMarker.username}</b>
+                        </span>
+                        {/* <span className="date">{format(p.createdAt)}</span> */}
+                        <span classname='date'> Date: {selectedMarker.date}</span>
+                    </div>
                 </Popup>)}
 
             </ReactMapGL>
