@@ -4,7 +4,7 @@ import ReactMapGL from 'react-map-gl';
 
 
 
-import { RegisterOrLogin, CovidData, CountrySelect, HomePageButton } from '../../components'
+import {CovidData, CountrySelect, HomePageButton } from '../../components'
 
 
 const mapStyle = {
@@ -63,7 +63,6 @@ export const Covidpage = () => {
                 {...mapStyle}
                 onViewportChange={(viewport) => setViewport(viewport)}
             >
-                <RegisterOrLogin />
                 <br></br>
                 <HomePageButton />
 
