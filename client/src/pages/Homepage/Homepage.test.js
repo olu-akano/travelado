@@ -21,8 +21,8 @@ describe('Homepage layout', () => {
         expect(title).toBeTruthy();
     })
 
-    test('See latet COVID-19 spread! button text is present', () => {
-        let title = screen.getByText(/See latet COVID-19 spread!/i);
+    test('Latest COVID-19 spread! button text is present', () => {
+        let title = screen.getByText(/Latest COVID-19 spread!/i);
         expect(title).toBeTruthy();
     })
 

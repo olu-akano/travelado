@@ -17,17 +17,17 @@ describe('Covidpage layout', () => {
     // })
 
     test('Login/Signup button text is present', () => {
-        let title = screen.getByText(/Login Signup/i);
+        let title = screen.getAllByText(/Login Signup/i);
         expect(title).toBeTruthy();
     })
 
     test('Homepage button text is present', () => {
-        let title = screen.getByText(/Homepage/i);
+        let title = screen.getAllByText(/Homepage/i);
         expect(title).toBeTruthy();
     })
 
     test('Choose a country bar label is present', () => {
-        let title = screen.getByText(/Choose a country/i);
+        let title = screen.getAllByRole(/Choose a country/i);
         expect(title).toBeTruthy();
     });
 });

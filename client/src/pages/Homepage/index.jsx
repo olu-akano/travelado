@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import axios from 'axios';
 import './style.css';
 
 
@@ -31,7 +32,8 @@ export const Homepage = () => {
     const [commentField, setCommentField] = useState("");
     const [ratingField, setRatingField] = useState(0);
     const [formError, setFormError] = useState(false);
-    const [currentUser, setCurrentUser] = useState("Saja");
+    const [currentUser, setCurrentUser] = useState("");
+    const [currentTime, setCurrentTime] = useState('');
     const [auth, setAuth] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
     const [viewport, setViewport] = useState(
@@ -40,6 +42,7 @@ export const Homepage = () => {
             longitude: 34.4710,
             zoom: 1.2
         });
+
 
     const [markers, setMarkers] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState({});
@@ -65,6 +68,17 @@ export const Homepage = () => {
         []
     );
 
+    useEffect(() => {
+        const getPins = async () => {
+            try {
+                const response = await axios.get('https://127.0.0.1:8000/reviews/home/')
+                setMarkers(response.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        getPins();
+    }, [])
 
     // events
     const handleChange = (event) => {
@@ -98,7 +112,7 @@ export const Homepage = () => {
         clickedLocation.stopImmediatePropagation()
         console.log(clickedLocation)
 
-        if (auth) {
+        if (localStorage.getItem('username')) {
             setcurrentClickedMarkerLatLng([lat, lng])
             setDialogOpen(true)
         }
@@ -108,24 +122,50 @@ export const Homepage = () => {
         showDialog(clickedLocation)
     }
 
+    const commitToDb = async (newMarker) => {
+        try {
+            let response = await fetch('https://127.0.0.1:8000/reviews/create/', {
+                method: "POST",
+                body: JSON.stringify(newMarker),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            let jsonResponse = await response.json()
+            console.log(jsonResponse.body)
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
+    const timeConvert = (timestamp) => {
+        let today = new Date(Number(timestamp));
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
 
-    const addMarker = () => {
+        today = dd + '/' + mm + '/' + yyyy;
+        return today;
+    }
+
+    const addMarker = async () => {
         const lat = currentClickedMarkerLatLng[0]
         const lng = currentClickedMarkerLatLng[1]
         if (titleField !== "" && commentField !== "" && ratingField !== 0) {
+            let newMarker = {
+                latitude: lat,
+                longitude: lng,
+                title: titleField,
+                body: commentField,
+                rating: ratingField,
+                username: localStorage.getItem('username'),
+                date: timeConvert(new Date().getTime())
+            }
             setMarkers([
                 ...markers,
-                {
-                    latitude: lat,
-                    longitude: lng,
-                    title: titleField,
-                    comment: commentField,
-                    rating: ratingField,
-                    userName: currentUser
-                }
+                newMarker
             ])
-
+            await commitToDb(newMarker)
             setDialogOpen(false)
             resetForm()
         } else {
@@ -174,9 +214,11 @@ export const Homepage = () => {
                 onViewportChange={(viewport) => setViewport(viewport)}
                 onDblClick={handleDialog}
             >
-                <RegisterOrLogin />
-                <br></br>
-                <CovidButton />
+                <div id='mainButtons'>
+                    <RegisterOrLogin />
+                    <CovidButton />
+
+                </div>
 
                 <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} geocoderContainerRef={geocoderContainerRef} handleGeocoderViewportChange={handleGeocoderViewportChange} />
 
@@ -190,11 +232,20 @@ export const Homepage = () => {
                     closeOnClick={false}
                     onClose={() => setShowPopup(false)}
                     anchor="top" >
-                    <div>{selectedMarker.title}</div>
-                    <div>{selectedMarker.comment}</div>
-                    <div>{selectedMarker.rating}/5</div>
-                    <div>{selectedMarker.userName}</div>
-                    {/* <div>{marker.timestamp}</div> */}
+                    <div className="card">
+                        <label>Place</label>
+                        <h4 className="place">{selectedMarker.title}</h4>
+                        <label>Review</label>
+                        <p>{selectedMarker.body}</p>
+                        <label>Rating</label>
+                        <div> Rating: {selectedMarker.rating}/5</div>
+                        <label>Information</label>
+                        <span className="username">
+                            Created by <b>{selectedMarker.username}</b>
+                        </span>
+                        {/* <span className="date">{format(p.createdAt)}</span> */}
+                        <span classname='date'> Date: {selectedMarker.date}</span>
+                    </div>
                 </Popup>)}
 
             </ReactMapGL>

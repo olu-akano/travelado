@@ -37,7 +37,12 @@ def signup(request):
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    #return render(request, 'home.html')
+    """ secret = os.getenv('TOKEN_SECRET')
+    user = request.user
+    encoded_jwt = jwt.encode({"username": user.username, "source": "travelado"}, secret, algorithm="HS256") """
+    #return redirect(f'http://localhost:8080/{request.user}/{encoded_jwt}')
+    return redirect(f'http://localhost:8080/home/{request.user}')
 
 
 @login_required

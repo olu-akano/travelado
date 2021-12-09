@@ -40,18 +40,24 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'social_django',
     'django_extensions',
-    'rest_framework'
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8080'
 ]
 
 ROOT_URLCONF = 'travelado.urls'
@@ -143,8 +149,6 @@ basedir = str(BASE_DIR.cwd())
 env = BASE_DIR.cwd() / '.env'
 load_dotenv(env)
 
-#SOCIAL_AUTH_TWITTER_KEY = ''
-#SOCIAL_AUTH_TWITTER_SECRET = ''
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('GOOGLE_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('GOOGLE_SECRET')
 SOCIAL_AUTH_FACEBOOK_KEY = os.getenv('FACEBOOK_KEY')

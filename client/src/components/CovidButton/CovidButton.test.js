@@ -1,14 +1,16 @@
-import { CountrySelect } from './index';
+import { CovidButton } from './index';
 import { screen } from '@testing-library/react';
 
-describe('CountrySelect layout', () => {
+describe('CovidButton layout', () => {
+
     beforeEach(() => {
-        render(<CountrySelect />)
+        // global.URL.createObjectURL = jest.fn();
+        render(<CovidButton />)
     })
 
     test('Label of country selector bar is present', () => {
         let title = screen.getAllByText(/Choose a country/i);
         expect(title).toBeTruthy();
     })
-        ;
+
 });
