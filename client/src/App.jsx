@@ -10,10 +10,12 @@ export function App() {
                 <Route exact path="/">
                     <Pages.Homepage />
                 </Route>
+                <Route exact path="/:username">
+                    <Pages.Homepage />
+                </Route>
                 <Route path="/covidpage">
                     <Pages.Covidpage />
                 </Route>
-
             </Switch>
 
 
