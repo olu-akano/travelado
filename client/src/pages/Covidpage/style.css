@@ -17,4 +17,12 @@
     border-radius: 4px;
     }
 
+    #homepageBtn {
+        display:flex;
+        justify-content: space-around;
+        margin-top: 7px;
+    
+    
+    }
+
 

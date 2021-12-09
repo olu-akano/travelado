@@ -63,9 +63,9 @@ export const Covidpage = () => {
                 {...mapStyle}
                 onViewportChange={(viewport) => setViewport(viewport)}
             >
-                <RegisterOrLogin />
-                <br></br>
-                <HomePageButton />
+                <div id='homepageBtn'>
+                    <HomePageButton />
+                </div>
 
                 <CovidData setCovidDataCountries={setCovidDataCountries} />
 
