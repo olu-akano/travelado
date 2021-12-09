@@ -1,15 +1,9 @@
-[[source]]
-url = "https://pypi.org/simple"
-verify_ssl = true
-name = "pypi"
-
 [packages]
 django = "*"
 django-allauth = "*"
 coverage = "*"
 model-bakery = "*"
 python-dotenv = "*"
-django-nose = "*"
 python-social-auth = {extras = ["django"], version = "*"}
 django-extensions = "*"
 djangorestframework-simplejwt = "*"
