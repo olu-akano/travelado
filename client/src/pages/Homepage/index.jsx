@@ -66,20 +66,11 @@ export const Homepage = () => {
         []
     );
 
-    const [placeId, setPlaceId] = useState(null)
-
-    const handleMarker = (id, lat, long) => {
-        setPlaceId(id)
-        setViewport({...viewport, latitude:lat, longitude:long})
-    }
-
-    const [pins, setPins] = useState([]);
-
     useEffect(() => {
         const getPins = async() => {
             try {
                 const response = await axios.get('https://127.0.0.1:8000/reviews/home/')
-                setPins(response.data)
+                setMarkers(response.data)
             } catch(err){
                 console.log(err)
             }
@@ -119,7 +110,7 @@ export const Homepage = () => {
         clickedLocation.stopImmediatePropagation()
         console.log(clickedLocation)
 
-        if (auth) {
+        if (localStorage.getItem('username')) {
             setcurrentClickedMarkerLatLng([lat, lng])
             setDialogOpen(true)
         }
@@ -129,24 +120,39 @@ export const Homepage = () => {
         showDialog(clickedLocation)
     }
 
+    const commitToDb = async (newMarker) => {
+        try {
+            let response = await fetch('https://127.0.0.1:8000/reviews/create/', {
+                method: "POST",
+                body: JSON.stringify(newMarker),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            let jsonResponse = await response.json()
+            console.log(jsonResponse.body)
+        } catch(err){
+            console.log(err)
+        }
+    }
 
-
-    const addMarker = () => {
+    const addMarker = async () => {
         const lat = currentClickedMarkerLatLng[0]
         const lng = currentClickedMarkerLatLng[1]
         if (titleField !== "" && commentField !== "" && ratingField !== 0) {
+            let newMarker = {
+                latitude: lat,
+                longitude: lng,
+                title: titleField,
+                body: commentField,
+                rating: ratingField,
+                username: currentUser
+            }
             setMarkers([
                 ...markers,
-                {
-                    latitude: lat,
-                    longitude: lng,
-                    title: titleField,
-                    comment: commentField,
-                    rating: ratingField,
-                    username: currentUser
-                }
+                newMarker
             ])
-
+            await commitToDb(newMarker)
             setDialogOpen(false)
             resetForm()
         } else {
@@ -183,7 +189,6 @@ export const Homepage = () => {
     }
 
 
-
     return (
         <>
 
@@ -197,36 +202,12 @@ export const Homepage = () => {
                 onDblClick={handleDialog}
             >
                 <RegisterOrLogin />
-                
                 <br></br>
                 <CovidButton />
 
                 <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} geocoderContainerRef={geocoderContainerRef} handleGeocoderViewportChange={handleGeocoderViewportChange} />
 
-                {pins.map((p, i, j) => (
-                    <>
-                        <Marker 
-                            key={i}
-                            latitude={parseInt(p.latitude)} 
-                            longitude={parseInt(p.longitude)}
-                            onClick={()=>handleMarker(p.id, parseInt())}>
-                        </Marker>
-                        {p.id === placeId && <Popup
-                            key={j}
-                            latitude={parseInt(p.latitude)}
-                            longitude={parseInt(p.longitude)}
-                            closeButton={true}
-                            closeOnClick={false}
-                            onClose={setPlaceId(null)}
-                            anchor="top" >
-                            <div>{p.title}</div>
-                            <div>{p.comment}</div>
-                            <div>{p.rating}/5</div>
-                            <div>{p.username}</div>
-                            <div>{p.timestamp}</div>
-                        </Popup>}
-                    </>
-                ))}
+
 
                 {markerCollection}
                 {showPopup && (<Popup
@@ -237,10 +218,10 @@ export const Homepage = () => {
                     onClose={() => setShowPopup(false)}
                     anchor="top" >
                     <div>{selectedMarker.title}</div>
-                    <div>{selectedMarker.comment}</div>
+                    <div>{selectedMarker.body}</div>
                     <div>{selectedMarker.rating}/5</div>
                     <div>{selectedMarker.username}</div>
-                    {/* <div>{marker.timestamp}</div> */}
+                    <div>{selectedMarker.date}</div>
                 </Popup>)}
 
             </ReactMapGL>

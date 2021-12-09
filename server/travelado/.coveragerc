@@ -4,3 +4,7 @@ omit =
    *manage.py*
    *__init__*
    *migrations*
+   *forms*
+   *asgi*
+   *tests*
+   *wsgi*

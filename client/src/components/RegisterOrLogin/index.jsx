@@ -5,12 +5,22 @@ import './style.css'
 
 export const RegisterOrLogin = () => {
     const params = useParams()
-    localStorage.setItem('username', params.username)
+    if(params.username){
+        localStorage.setItem('username', params.username)
+    }
     if(params.token){
         let token = jwt_decode(params.token);
         console.log(token)
     }
 
+    const clearUsername = () => {
+        if(localStorage.getItem('username')){
+            localStorage.removeItem('username')
+        }
+        if(localStorage.getItem('token')){
+            localStorage.removeItem('token')
+        }
+    }
     /* useEffect(() => {
         if(params.username){
             const getToken = async() => {
@@ -35,7 +45,7 @@ export const RegisterOrLogin = () => {
         <div>
             {params.username ? <div>
                 <h1 className="usernameDisplay">{params.username}</h1>
-                <form action="https://127.0.0.1:8000/logout/">
+                <form action="https://127.0.0.1:8000/logout/" onSubmit={clearUsername}>
                     <input className ="LoginOrSignup" type="submit" value=" Logout " />
                 </form>
              </div>

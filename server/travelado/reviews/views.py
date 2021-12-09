@@ -8,7 +8,6 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView, UpdateAPIView
-from django.utils.decorators import method_decorator
 from .models import Reviews
 from .serializers import ReviewsSerializer
 from dotenv import load_dotenv
@@ -39,6 +38,10 @@ def signup(request):
 @login_required
 def home(request):
     #return render(request, 'home.html')
+    """ secret = os.getenv('TOKEN_SECRET')
+    user = request.user
+    encoded_jwt = jwt.encode({"username": user.username, "source": "travelado"}, secret, algorithm="HS256") """
+    #return redirect(f'http://localhost:8080/{request.user}/{encoded_jwt}')
     return redirect(f'http://localhost:8080/{request.user}')
 
 
@@ -76,7 +79,6 @@ class ListReviewsView(ListAPIView):
     queryset = Reviews.objects.all()
     serializer_class = ReviewsSerializer
 
-@method_decorator(login_required, name='dispatch')
 class CreateReviewsView(CreateAPIView):
     queryset = Reviews.objects.all()
     serializer_class = ReviewsSerializer
