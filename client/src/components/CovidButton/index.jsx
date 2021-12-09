@@ -6,7 +6,7 @@ export const CovidButton = () => {
         <div>
 
             <form action="/covidpage">
-                <input className="CovidButton" type="submit" value="See latest COVID-19 spread!" />
+                <input className="CovidButton" type="submit" value="Latest COVID-19 spread!" />
             </form>
 
         </div>
