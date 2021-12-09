@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView, UpdateAPIView
+from django.utils.decorators import method_decorator
 from .models import Reviews
 from .serializers import ReviewsSerializer
 from dotenv import load_dotenv
@@ -74,6 +75,7 @@ class ListReviewsView(ListAPIView):
     queryset = Reviews.objects.all()
     serializer_class = ReviewsSerializer
 
+@method_decorator(login_required, name='dispatch')
 class CreateReviewsView(CreateAPIView):
     queryset = Reviews.objects.all()
     serializer_class = ReviewsSerializer

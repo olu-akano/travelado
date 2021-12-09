@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'social_django',
     'django_extensions',
-    'rest_framework'
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
