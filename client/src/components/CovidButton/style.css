@@ -7,7 +7,7 @@
       color: #fff;
       cursor: pointer;
       font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 16px;
+      font-size: 10px;
       font-weight: 400;
       outline: none;
       outline: 0;
@@ -18,6 +18,8 @@
       user-select: none;
       -webkit-user-select: none;
       touch-action: manipulation;
+      display: inline;
+
     }
     
 .CovidButton:hover {

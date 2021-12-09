@@ -5,11 +5,11 @@ import './style.css';
 export const CovidButton = () => {
     return (
         <div>
-            <Button action="/covidpage" value="See latest COVID-19 spread!"/>
+            {/* <Button action="/covidpage" value="See latest COVID-19 spread!"/> */}
 
-            {/* <form action="/covidpage">
-                <input className="CovidButton" type="submit" value="See latest COVID-19 spread!" />
-            </form> */}
+            <form action="/covidpage">
+                <input className="CovidButton" type="submit" value="Latest COVID-19 news!" />
+            </form>
 
         </div>
     )

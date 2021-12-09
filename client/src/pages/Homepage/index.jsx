@@ -43,7 +43,7 @@ export const Homepage = () => {
             zoom: 1.2
         });
 
-        
+
     const [markers, setMarkers] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState({});
 
@@ -69,16 +69,16 @@ export const Homepage = () => {
     );
 
     useEffect(() => {
-        const getPins = async() => {
+        const getPins = async () => {
             try {
                 const response = await axios.get('https://127.0.0.1:8000/reviews/home/')
                 setMarkers(response.data)
-            } catch(err){
+            } catch (err) {
                 console.log(err)
             }
         }
         getPins();
-    },[])
+    }, [])
 
     // events
     const handleChange = (event) => {
@@ -133,7 +133,7 @@ export const Homepage = () => {
             })
             let jsonResponse = await response.json()
             console.log(jsonResponse.body)
-        } catch(err){
+        } catch (err) {
             console.log(err)
         }
     }
@@ -143,7 +143,7 @@ export const Homepage = () => {
         let dd = String(today.getDate()).padStart(2, '0');
         let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         let yyyy = today.getFullYear();
-    
+
         today = dd + '/' + mm + '/' + yyyy;
         return today;
     }
@@ -214,12 +214,14 @@ export const Homepage = () => {
                 onViewportChange={(viewport) => setViewport(viewport)}
                 onDblClick={handleDialog}
             >
-                <RegisterOrLogin />
-                {/* <br></br> */}
+                <div id='mainButtons'>
+                    <RegisterOrLogin />
+                    <CovidButton />
+
+                </div>
 
                 <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} geocoderContainerRef={geocoderContainerRef} handleGeocoderViewportChange={handleGeocoderViewportChange} />
 
-                <CovidButton />
 
 
                 {markerCollection}
