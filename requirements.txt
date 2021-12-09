@@ -12,4 +12,3 @@ pyopenssl
 social-auth-app-django
 djongo
 pytz
-python == "*"
