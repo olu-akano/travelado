@@ -2,6 +2,8 @@ import { Covidpage } from './index';
 import { screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
+jest.mock('react-map-gl-geocoder', () => (  () => 'Search' ));
+
 
 describe('Covidpage layout', () => {
     beforeEach(() => {
@@ -11,10 +13,7 @@ describe('Covidpage layout', () => {
             </BrowserRouter>)
     })
 
-    // test('Title of container is present', () => {
-    //     let title = screen.getByText(/let's play !/i);
-    //     expect(title).toBeTruthy();
-    // })
+
 
     test('Login/Signup button text is present', () => {
         let title = screen.getAllByText(/Login Signup/i);
@@ -27,7 +26,7 @@ describe('Covidpage layout', () => {
     })
 
     test('Choose a country bar label is present', () => {
-        let title = screen.getAllByRole(/Choose a country/i);
+        let title = screen.getAllByText(/Choose a country/i);
         expect(title).toBeTruthy();
     });
 });

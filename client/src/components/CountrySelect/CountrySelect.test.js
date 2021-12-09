@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react';
 
 describe('CountrySelect layout', () => {
     beforeEach(() => {
-        render(<CountrySelect />)
+        render(<CountrySelect covidDataCountries={[]} setViewport={() => { }} />)
     })
 
     test('Label of country selector bar is present', () => {
