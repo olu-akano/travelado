@@ -7,8 +7,8 @@ class Reviews(models.Model):
     title = models.CharField(max_length = 200)
     rating = models.PositiveIntegerField()
     body = models.CharField(max_length = 1500)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.CharField(max_length = 50)
+    longitude = models.CharField(max_length = 50)
     date = models.DateTimeField(auto_now=True)
 
     def __str__(self):

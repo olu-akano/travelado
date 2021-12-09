@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from dotenv import load_dotenv
 from pathlib import Path
 import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -90,7 +91,10 @@ DATABASES={
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'travelado',
-    }
+    },
+    'CLIENT': {
+            'DB_CONNECTION': 'mongodb+srv://olu:42Ve?3`.6~HPmpr@travelado-app.y8twz.mongodb.net/travelado?retryWrites=true&w=majority'
+        }
 } 
 
 
@@ -158,5 +162,6 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home'
 
-SITE_ID = 1
+SITE_ID=1
 
+django_heroku.settings(locals())
