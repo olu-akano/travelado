@@ -41,6 +41,13 @@ export const Homepage = () => {
             zoom: 1.2
         });
 
+
+    useEffect(async () => {
+        let data = await fetch('http://localhost:8000/') //convert to axios and correct path
+        let markersFromDb = await data.json()
+        setMarkers(markersFromDb)
+    })
+
     const [markers, setMarkers] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState({});
 
@@ -110,21 +117,42 @@ export const Homepage = () => {
 
 
 
+
+    const commitToDb = (newMarker) => { //convert to axios and get correct path
+        return fetch('http://localhost:8000'), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newMarker),
+        }
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.log('Error:', error);
+            });
+    }
+
     const addMarker = () => {
         const lat = currentClickedMarkerLatLng[0]
         const lng = currentClickedMarkerLatLng[1]
         if (titleField !== "" && commentField !== "" && ratingField !== 0) {
+            let newMarker = {
+                latitude: lat,
+                longitude: lng,
+                title: titleField,
+                comment: commentField,
+                rating: ratingField,
+                userName: currentUser
+            }
             setMarkers([
                 ...markers,
-                {
-                    latitude: lat,
-                    longitude: lng,
-                    title: titleField,
-                    comment: commentField,
-                    rating: ratingField,
-                    userName: currentUser
-                }
+                newMarker
             ])
+
+            await commitToDb(newMarker)
 
             setDialogOpen(false)
             resetForm()
