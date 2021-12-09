@@ -5,7 +5,7 @@ export const HomePageButton = () => {
     return (
         <div>
 
-            <form action="/">
+            <form action="/home">
                 <input className="HomePageButton" type="submit" value="Homepage" />
             </form>
 

@@ -42,7 +42,7 @@ def home(request):
     user = request.user
     encoded_jwt = jwt.encode({"username": user.username, "source": "travelado"}, secret, algorithm="HS256") """
     #return redirect(f'http://localhost:8080/{request.user}/{encoded_jwt}')
-    return redirect(f'http://localhost:8080/{request.user}')
+    return redirect(f'http://localhost:8080/home/{request.user}')
 
 
 @login_required
