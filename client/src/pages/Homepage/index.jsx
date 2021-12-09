@@ -112,10 +112,10 @@ export const Homepage = () => {
         clickedLocation.stopImmediatePropagation()
         console.log(clickedLocation)
 
-        if (localStorage.getItem('username')) {
-            setcurrentClickedMarkerLatLng([lat, lng])
-            setDialogOpen(true)
-        }
+        // if (localStorage.getItem('username')) {
+        setcurrentClickedMarkerLatLng([lat, lng])
+        setDialogOpen(true)
+        // }
     }
 
     const handleDialog = (clickedLocation) => {
@@ -233,9 +233,9 @@ export const Homepage = () => {
                     onClose={() => setShowPopup(false)}
                     anchor="top" >
                     <div className="card">
-                        <label>Place</label>
+                        <label className="review">Place</label>
                         <h4 className="place">{selectedMarker.title}</h4>
-                        <label>Review</label>
+                        <label className="review">Review</label>
                         <p>{selectedMarker.body}</p>
                         <label>Rating</label>
                         <div> Rating: {selectedMarker.rating}/5</div>
