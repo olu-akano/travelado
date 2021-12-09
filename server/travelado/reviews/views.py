@@ -38,7 +38,8 @@ def signup(request):
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    #return render(request, 'home.html')
+    return redirect(f'http://localhost:8080/{request.user}')
 
 
 @login_required
