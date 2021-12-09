@@ -37,7 +37,12 @@ def signup(request):
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    #return render(request, 'home.html')
+    """ secret = os.getenv('TOKEN_SECRET')
+    user = request.user
+    encoded_jwt = jwt.encode({"username": user.username, "source": "travelado"}, secret, algorithm="HS256") """
+    #return redirect(f'http://localhost:8080/{request.user}/{encoded_jwt}')
+    return redirect(f'http://localhost:8080/home/{request.user}')
 
 
 @login_required
@@ -69,7 +74,6 @@ def current_user(request):
       'token' : encoded_jwt,
     })
 
-
 # Create your views here.
 class ListReviewsView(ListAPIView):
     queryset = Reviews.objects.all()
@@ -86,8 +90,3 @@ class UpdateReviewsView(UpdateAPIView):
 class DeleteReviewsView(DestroyAPIView):
     queryset = Reviews.objects.all()
     serializer_class = ReviewsSerializer
-
-# secret = os.getenv('TOKEN_SECRET')
-# token = '{"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFrYW5vcGF1bC5zcCIsInNvdXJjZSI6InRyYXZlbGFkbyJ9.1iBESx4XcycK_VPPCgcE80S2IKH3-A-3P8N4xBQpnUI"}'
-# decoded = jwt.decode(token, secret, algorithms=['HS256'])
-# print(decoded['username'])

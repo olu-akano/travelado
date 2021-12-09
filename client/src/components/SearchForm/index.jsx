@@ -9,9 +9,8 @@ export const SearchForm = ({ mapRef, mapboxApiKey, handleGeocoderViewportChange,
             <div
                 ref={geocoderContainerRef}
                 style={{
-
-                    marginLeft: "45%",
-                    marginTop: -50,
+                    marginLeft: '20%',
+                    marginTop: 50,
                     zIndex: 1,
                     width: 50
 

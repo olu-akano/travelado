@@ -1,7 +1,12 @@
 from django.contrib.auth.models import User
 from django.test import TestCase, Client
+import pytest
 from django.urls import reverse
 import json
+from model_bakery import baker
+from .models import Reviews
+
+pytestmark = pytest.mark.django_db
 
 class BaseTestCase(TestCase):
     
@@ -25,4 +30,25 @@ class TestAuthViews(BaseTestCase):
     def setUp(self):
         self.client = Client()
         self.client.login(username="username", password="test56user")
+
+    def test_home_page_load(self):
+        response = self.client.get(reverse('home'))
+        self.assertRedirects(response, expected_url="/login/?next=/", status_code=302)
+
+class TestModels(TestCase):
+    def setUp(self):
+        self.reviews = baker.make(Reviews) #title="Birmingham is too rowdy")
+
+class TestTPostReviews(TestCase):
+    def test_post_reviews(self):
+        data = {
+            "username": "juliana",
+            "title": "I love the sun in Miami",
+            "rating": 5,
+            "body": "Went over for spring break and it was amazing!",
+            "latitude": "25.7617° N",
+            "longitude": "80.1918° W"
+        }
+        response = self.client.post("/reviews/create/", data=data)
+        self.assertEqual(Reviews.objects.count(), 1)
 

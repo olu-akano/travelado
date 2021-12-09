@@ -1,4 +1,10 @@
+#mainButtons {
+    display:flex;
+    justify-content: space-around;
+    margin-top: 7px;
+    margin-right: -10px;;
 
+}
 .map-container {
     height: 400px;
     }
@@ -44,6 +50,9 @@ transform: rotateZ(135deg)
 }
 
 .temporary-marker span {
-background: red;
+background: teal;
 }
 
+.mapboxgl-popup-content {
+    background-color: red;
+}

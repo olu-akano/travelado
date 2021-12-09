@@ -52,7 +52,7 @@ export const Covidpage = () => {
         <>
 
             {covidDataCountries.length && (
-                <CountrySelect covidDataCountries={covidDataCountries} />
+                <CountrySelect covidDataCountries={covidDataCountries} setViewport={setViewport} />
             )}
             <br></br>
             <ReactMapGL
