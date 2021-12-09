@@ -66,6 +66,13 @@ export const Homepage = () => {
         []
     );
 
+    const [placeId, setPlaceId] = useState(null)
+
+    const handleMarker = (id, lat, long) => {
+        setPlaceId(id)
+        setViewport({...viewport, latitude:lat, longitude:long})
+    }
+
     const [pins, setPins] = useState([]);
 
     useEffect(() => {
@@ -176,6 +183,7 @@ export const Homepage = () => {
     }
 
 
+
     return (
         <>
 
@@ -200,22 +208,23 @@ export const Homepage = () => {
                         <Marker 
                             key={i}
                             latitude={parseInt(p.latitude)} 
-                            longitude={parseInt(p.longitude)}>
+                            longitude={parseInt(p.longitude)}
+                            onClick={()=>handleMarker(p.id, parseInt())}>
                         </Marker>
-                        <Popup
+                        {p.id === placeId && <Popup
                             key={j}
                             latitude={parseInt(p.latitude)}
                             longitude={parseInt(p.longitude)}
                             closeButton={true}
                             closeOnClick={false}
-                            onClose={() => setShowPopup(false)}
+                            onClose={setPlaceId(null)}
                             anchor="top" >
                             <div>{p.title}</div>
                             <div>{p.comment}</div>
                             <div>{p.rating}/5</div>
                             <div>{p.username}</div>
                             <div>{p.timestamp}</div>
-                        </Popup>
+                        </Popup>}
                     </>
                 ))}
 
