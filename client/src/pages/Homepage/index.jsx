@@ -6,7 +6,7 @@ import './style.css';
 
 
 import { GeoLocater, SearchForm, RegisterOrLogin, CovidButton } from '../../components'
-
+// bring back GeoLocater
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -32,7 +32,7 @@ export const Homepage = () => {
     const [commentField, setCommentField] = useState("");
     const [ratingField, setRatingField] = useState(0);
     const [formError, setFormError] = useState(false);
-    const [currentUser, setCurrentUser] = useState("hamsa");
+    const [currentUser, setCurrentUser] = useState("");
     const [currentTime, setCurrentTime] = useState('');
     const [auth, setAuth] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -112,6 +112,8 @@ export const Homepage = () => {
         let lng = clickedLocation.lngLat[0]
         clickedLocation.stopImmediatePropagation()
         console.log(clickedLocation)
+
+        // bring this back for auth crud
 
         // if (localStorage.getItem('username')) {
         setcurrentClickedMarkerLatLng([lat, lng])
