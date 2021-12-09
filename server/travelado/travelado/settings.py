@@ -40,18 +40,24 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'social_django',
     'django_extensions',
-    'rest_framework'
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8080'
 ]
 
 ROOT_URLCONF = 'travelado.urls'

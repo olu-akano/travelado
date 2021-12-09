@@ -1,4 +1,5 @@
 from django.db import models
+import jwt
 
 # Create your models here.
 class Reviews(models.Model):
@@ -13,3 +14,6 @@ class Reviews(models.Model):
 
     def __str__(self):
         return f'{self.title}'
+
+
+        

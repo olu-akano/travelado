@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import axios from 'axios';
 import './style.css';
 
 
@@ -31,7 +32,7 @@ export const Homepage = () => {
     const [commentField, setCommentField] = useState("");
     const [ratingField, setRatingField] = useState(0);
     const [formError, setFormError] = useState(false);
-    const [currentUser, setCurrentUser] = useState("Saja");
+    const [currentUser, setCurrentUser] = useState("");
     const [auth, setAuth] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
     const [viewport, setViewport] = useState(
@@ -65,6 +66,19 @@ export const Homepage = () => {
         []
     );
 
+    const [pins, setPins] = useState([]);
+
+    useEffect(() => {
+        const getPins = async() => {
+            try {
+                const response = await axios.get('https://127.0.0.1:8000/reviews/home/')
+                setPins(response.data)
+            } catch(err){
+                console.log(err)
+            }
+        }
+        getPins();
+    },[])
 
     // events
     const handleChange = (event) => {
@@ -122,7 +136,7 @@ export const Homepage = () => {
                     title: titleField,
                     comment: commentField,
                     rating: ratingField,
-                    userName: currentUser
+                    username: currentUser
                 }
             ])
 
@@ -175,12 +189,35 @@ export const Homepage = () => {
                 onDblClick={handleDialog}
             >
                 <RegisterOrLogin />
+                
                 <br></br>
                 <CovidButton />
 
                 <SearchForm mapRef={mapRef} mapboxApiKey={mapboxApiKey} geocoderContainerRef={geocoderContainerRef} handleGeocoderViewportChange={handleGeocoderViewportChange} />
 
-
+                {pins.map((p, i, j) => (
+                    <>
+                        <Marker 
+                            key={i}
+                            latitude={parseInt(p.latitude)} 
+                            longitude={parseInt(p.longitude)}>
+                        </Marker>
+                        <Popup
+                            key={j}
+                            latitude={parseInt(p.latitude)}
+                            longitude={parseInt(p.longitude)}
+                            closeButton={true}
+                            closeOnClick={false}
+                            onClose={() => setShowPopup(false)}
+                            anchor="top" >
+                            <div>{p.title}</div>
+                            <div>{p.comment}</div>
+                            <div>{p.rating}/5</div>
+                            <div>{p.username}</div>
+                            <div>{p.timestamp}</div>
+                        </Popup>
+                    </>
+                ))}
 
                 {markerCollection}
                 {showPopup && (<Popup
@@ -193,7 +230,7 @@ export const Homepage = () => {
                     <div>{selectedMarker.title}</div>
                     <div>{selectedMarker.comment}</div>
                     <div>{selectedMarker.rating}/5</div>
-                    <div>{selectedMarker.userName}</div>
+                    <div>{selectedMarker.username}</div>
                     {/* <div>{marker.timestamp}</div> */}
                 </Popup>)}
 
