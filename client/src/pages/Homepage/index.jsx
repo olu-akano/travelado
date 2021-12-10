@@ -115,10 +115,10 @@ export const Homepage = () => {
 
         // bring this back for auth crud
 
-        // if (localStorage.getItem('username')) {
+        if (localStorage.getItem('username')) {
         setcurrentClickedMarkerLatLng([lat, lng])
         setDialogOpen(true)
-        // }
+        }
     }
 
     const handleDialog = (clickedLocation) => {
