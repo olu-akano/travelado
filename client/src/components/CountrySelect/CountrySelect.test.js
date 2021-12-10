@@ -1,4 +1,5 @@
 import { CountrySelect } from './index';
+jest.mock('./index', () => (() => 'Choose a country'));
 import { screen } from '@testing-library/react';
 
 describe('CountrySelect layout', () => {
